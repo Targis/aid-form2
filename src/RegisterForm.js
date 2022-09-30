@@ -31,6 +31,8 @@ import { parseDateString } from './helpers/date'
 
 import { streets, cities } from './helpers/toponyms'
 
+import StreetField from './components/StreetField'
+
 const phoneNumberRegex =
   /\(?([0-9]{3})\)?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/
 
@@ -208,7 +210,7 @@ const RegisterForm = () => {
           </Grid>
         </Grid>
       </FormikStep>
-      {/*
+
       <FormikStep>
         <SelectInput
           name="city"
@@ -217,18 +219,7 @@ const RegisterForm = () => {
           fullWidth
         />
 
-        {props.values.city === 'м.Оріхів' && (
-          <AutocompleteField
-            name="street"
-            label="Вулиця"
-            options={streets}
-            fullWidth
-          />
-        )}
-
-        {formik.values.city !== '' && formik.values.city !== 'м.Оріхів' && (
-          <TextInput name="street" label="Вулиця" fullWidth />
-        )}
+        <StreetField streets={streets} />
 
         <Grid container columnSpacing={2} columns={11}>
           <Grid item xs={12} sm={4}>
@@ -243,7 +234,7 @@ const RegisterForm = () => {
         </Grid>
       </FormikStep>
 
-      
+      {/*
         <div>
           <TextInput
             name="factAddress"
