@@ -1,20 +1,10 @@
 import React from 'react'
 
-import {
-  useFormik,
-  useField,
-  Field,
-  Form,
-  Formik,
-  useFormikContext,
-} from 'formik'
+import { Form, Formik } from 'formik'
 
 import {
-  TextField,
   Button,
   Grid,
-  Checkbox,
-  FormControlLabel,
   Stepper,
   Step,
   StepLabel,
@@ -22,15 +12,10 @@ import {
 } from '@mui/material'
 import MaskedTextField from './components/MaskedTextField'
 import TextInput from './components/TextInput'
-// import MultiSelectElement from './components/MultiSelectElement'
-import MultiSelectField from './components/MultiSelectField'
 import SelectInput from './components/SelectInput'
-import AutocompleteField from './components/AutocompliteField'
 import * as yup from 'yup'
 import { parseDateString } from './helpers/date'
-
 import { streets, cities } from './helpers/toponyms'
-
 import StreetField from './components/StreetField'
 
 const phoneNumberRegex =
@@ -90,14 +75,6 @@ const initialValues = {
 }
 
 const RegisterForm = () => {
-  // const formik = useFormik({
-  //   validationSchema: schema,
-  //   initialValues,
-  //   onSubmit: (values) => {
-  //     alert(JSON.stringify(values, null, 2))
-  //   },
-  // })
-
   return (
     <FormikStepper
       validationSchema={schema}
@@ -130,11 +107,6 @@ const RegisterForm = () => {
           format="+38(###)###-##-##"
           mask="_"
           fullWidth
-
-          // onBlur={props.handleBlur}
-          // onChange={formik.handleChange}
-          // value={formik.values.phoneNumber}
-          // formik={formik}
         />
 
         <MaskedTextField
@@ -143,9 +115,6 @@ const RegisterForm = () => {
           format="##########"
           mask="_"
           fullWidth
-          // onChange={formik.handleChange}
-          // value={formik.values.inn}
-          // formik={formik}
         />
       </FormikStep>
 
