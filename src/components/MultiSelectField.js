@@ -206,18 +206,15 @@ function getStyles(name, personName, theme) {
 }
 
 export default function MultiSelectField({ ...props }) {
-  const [field, meta] = useField(props.name)
+  const [field, meta, helpers] = useField(props.name)
   const theme = useTheme()
-  const [personName, setPersonName] = React.useState([])
 
   const handleChange = (event) => {
-    const {
+    let {
       target: { value },
     } = event
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    )
+
+    helpers.setValue(typeof value === 'string' ? value.split(',') : value)
   }
 
   const { name, options } = props
@@ -232,8 +229,7 @@ export default function MultiSelectField({ ...props }) {
           {...field}
           labelId={'multiple-chip-label-' + name}
           id={'multiple-chip-' + name}
-          value={meta.value}
-          // onChange={handleChange}
+          onChange={handleChange}
           input={
             <OutlinedInput
               id={'select-multiple-chip-' + name}

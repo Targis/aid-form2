@@ -1,7 +1,7 @@
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Grid, FormControl, InputLabel, Input, Button } from '@mui/material'
-import InputTextMask from './InputTextMask'
+import InputTextMask from './MaskedTextField'
 import * as yup from 'yup'
 
 const schema = yup.object().shape({

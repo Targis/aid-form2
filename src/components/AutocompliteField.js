@@ -6,7 +6,7 @@ import { useField } from 'formik'
 
 export default function AutocompleteField({ ...props }) {
   const { name, label, options } = props
-  const [field, meta] = useField(name)
+  // const [field, meta] = useField(name)
   return (
     <Autocomplete
       isOptionEqualToValue={(option, value) => option.id === value.id}
@@ -15,12 +15,12 @@ export default function AutocompleteField({ ...props }) {
       options={options}
       renderInput={(params) => (
         <TextInput
-          {...field}
+          // {...field}
           {...props}
           {...params}
           name={name}
           label={label}
-          helperText={(meta.touched && meta.error) || ' '}
+          // helperText={(meta.touched && meta.error) || ' '}
         />
       )}
       sx={{ mb: 2 }}
