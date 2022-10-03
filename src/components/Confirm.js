@@ -8,84 +8,97 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 
 const Confirm = ({
-  nextStep,
-  prevStep,
-  values: { firstName, lastName, email, occupation, city, bio },
+  values: {
+    lastName,
+    firstName,
+    middleName,
+    birthday,
+    inn,
+    socialStatus,
+    familySize,
+    children,
+    city,
+    street,
+    addrNum,
+    addrCorp,
+    addrRoom,
+    factAddress,
+    vpoNumber,
+    vpoDate,
+    phoneNumber,
+  },
 }) => {
-  const next = (e) => {
-    e.preventDefault()
-    console.log({ firstName, lastName, email, occupation, city, bio })
-    nextStep()
-  }
-  const back = (e) => {
-    e.preventDefault()
-    prevStep()
+  const getStreet = () => {
+    if (city === 'м.Оріхів') {
+      const streetArr = street.split(', ')
+      return `${streetArr[1]} ${streetArr[0]}`
+    }
+    return street
   }
 
+  const fullAddress = `${city}, ${getStreet()}, ${addrNum}${
+    addrCorp ? '-' + addrCorp : ''
+  } ${addrRoom ? 'кв. ' + addrRoom : ''}`
   return (
     <>
-      <AppBar style={{ background: '#098F8F' }} position="sticky">
-        <Toolbar title="Enter Personal Information">
-          <Typography color="inherit" variant="title">
-            Confirm Details
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
-            Confirm your info
+            Перевірте правильність введених даних
           </ListSubheader>
         }
       >
         <ListItem>
-          <ListItemText primary="First Name" secondary={firstName} />
+          <ListItemText
+            primary="Повне ім'я"
+            secondary={`${lastName} ${firstName} ${middleName}`}
+          />
         </ListItem>
         <ListItem>
-          <ListItemText primary="Last Name" secondary={lastName} />
+          <ListItemText primary="Дата народження" secondary={birthday} />
         </ListItem>
+
         <ListItem>
-          <ListItemText primary="Email" secondary={email} />
+          <ListItemText primary="Номер телефону" secondary={phoneNumber} />
         </ListItem>
+
         <ListItem>
-          <ListItemText primary="Occupation" secondary={occupation} />
+          <ListItemText primary="Податковий номер" secondary={inn} />
         </ListItem>
+
         <ListItem>
-          <ListItemText primary="City" secondary={city} />
+          <ListItemText primary="Соціальний статус" secondary={socialStatus} />
         </ListItem>
+
         <ListItem>
-          <ListItemText primary="Bio" secondary={bio} />
+          <ListItemText primary="Дорослих" secondary={familySize} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemText primary="Дітей" secondary={children} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemText primary="Адреса реєстрації" secondary={fullAddress} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemText primary="Фактична адреса" secondary={factAddress} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemText
+            primary="Довідка ВПО"
+            secondary={`від ${vpoDate} № ${vpoNumber}`}
+          />
         </ListItem>
       </List>
 
       <br />
 
       <br />
-      <Button
-        style={{
-          background: '#EE3B55',
-          color: '#FFFFFF',
-          marginRight: '1em',
-        }}
-        label="Continue"
-        onClick={(e) => back(e)}
-      >
-        Back
-      </Button>
-      <Button
-        style={{
-          background: '#3C61B8',
-          color: '#FFFFFF',
-          marginRight: '1em',
-        }}
-        label="Continue"
-        onClick={(e) => next(e)}
-      >
-        Confirm and Continue
-      </Button>
     </>
   )
 }
