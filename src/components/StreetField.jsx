@@ -3,21 +3,21 @@ import { useFormikContext } from 'formik'
 import TextInput from './TextInput'
 import AutocompleteField from './AutocompliteField'
 
-const StreetField = ({ streets }) => {
+const StreetField = ({ streets, name, label }) => {
   const { values } = useFormikContext()
   return (
     <>
       {values.city === 'м.Оріхів' && (
         <AutocompleteField
-          name="street"
-          label="Вулиця"
+          name={name}
+          label={label}
           options={streets}
           fullWidth
         />
       )}
 
       {values.city !== '' && values.city !== 'м.Оріхів' && (
-        <TextInput name="street" label="Вулиця" fullWidth />
+        <TextInput name={name} label={label} fullWidth />
       )}
     </>
 

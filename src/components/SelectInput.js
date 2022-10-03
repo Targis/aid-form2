@@ -10,14 +10,19 @@ export default function SelectInput({ ...props }) {
   const [field, meta] = useField(name)
 
   return (
-    <FormControl sx={{ mb: 2, textAlign: 'left' }} fullWidth>
-      <InputLabel id={'simple-select-label-' + name}>{label}</InputLabel>
+    <FormControl
+      sx={{ mb: 2, textAlign: 'left' }}
+      fullWidth
+      error={meta.touched && Boolean(meta.error)}
+    >
+      <InputLabel id={'select-label-' + name}>{label}</InputLabel>
       <Select
         {...field}
         {...props}
-        labelId={'simple-select-label-' + name}
+        labelId={'select-label-' + name}
         id={'simple-select' + name}
         name={name}
+        label={label}
         value={meta.value}
       >
         {options.map((option, i) => (

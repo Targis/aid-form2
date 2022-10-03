@@ -62,7 +62,7 @@ const initialValues = {
   inn: '',
   socialStatus: [],
   familySize: '',
-  children: '',
+  children: '0',
   city: '',
   street: '',
   addrNum: '',
@@ -85,7 +85,7 @@ const RegisterForm = () => {
         setTimeout(() => alert(JSON.stringify(values, null, 2)), 1500)
       }}
     >
-      <FormikStep
+      {/* <FormikStep
         label="Ідентифікація"
         validationSchema={yup.object({
           inn: yup
@@ -142,6 +142,10 @@ const RegisterForm = () => {
             .transform(parseDateString)
             .typeError('Будь ласка, введіть дату в такому форматі ДД-ММ-РРРР')
             .max(today, 'Ви дійсно ще не народилися?'),
+          familySize: yup
+            .number()
+            .required("Це поле обов'язкове")
+            .min(1, 'Мінімальне значення - 1'),
         })}
       >
         <TextInput name="lastName" label="Прізвище" fullWidth />
@@ -172,15 +176,27 @@ const RegisterForm = () => {
 
         <Grid container columnSpacing={2}>
           <Grid item xs={12} sm={6}>
-            <TextInput name="familySize" label="Кількість дорослих" fullWidth />
+            <MaskedTextField
+              mask={Number}
+              name="familySize"
+              label="Кількість дорослих"
+              fullWidth
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextInput name="children" label="Кількість дітей" fullWidth />
           </Grid>
         </Grid>
-      </FormikStep>
+      </FormikStep> */}
 
-      <FormikStep>
+      <FormikStep
+        label="Реєстрація"
+        validationSchema={yup.object({
+          city: yup.string().required("Це поле обов'язкове").min(8, ''),
+          street: yup.string().required("Це поле обов'язкове"),
+          addrNum: yup.string().required("Це поле обов'язкове"),
+        })}
+      >
         <SelectInput
           name="city"
           label="Населений пункт"
@@ -188,7 +204,7 @@ const RegisterForm = () => {
           fullWidth
         />
 
-        <StreetField streets={streets} />
+        <StreetField name="street" label="Вулиця" streets={streets} />
 
         <Grid container columnSpacing={2} columns={11}>
           <Grid item xs={12} sm={4}>
