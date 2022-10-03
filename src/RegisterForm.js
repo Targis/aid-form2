@@ -85,7 +85,7 @@ const RegisterForm = () => {
         setTimeout(() => alert(JSON.stringify(values, null, 2)), 1500)
       }}
     >
-      {/* <FormikStep
+      <FormikStep
         label="Ідентифікація"
         validationSchema={yup.object({
           inn: yup
@@ -116,9 +116,9 @@ const RegisterForm = () => {
           mask="_"
           fullWidth
         />
-      </FormikStep> */}
+      </FormikStep>
 
-      {/* <FormikStep
+      <FormikStep
         label="Загальні відомості"
         validationSchema={yup.object({
           lastName: yup
@@ -187,7 +187,7 @@ const RegisterForm = () => {
             <TextInput name="children" label="Кількість дітей" fullWidth />
           </Grid>
         </Grid>
-      </FormikStep> */}
+      </FormikStep>
 
       <FormikStep
         label="Реєстрація"

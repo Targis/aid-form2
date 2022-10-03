@@ -1,9 +1,5 @@
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import FormHelperText from '@mui/material/FormHelperText'
-import TextInput from './TextInput'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
 import { useField } from 'formik'
 
 export default function AutocompleteField({ ...props }) {
