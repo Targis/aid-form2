@@ -14,14 +14,13 @@ export default function AutocompleteField({ ...props }) {
     <Autocomplete
       {...field}
       {...props}
-      isOptionEqualToValue={(option, value) => option?.id === value?.id}
+      isOptionEqualToValue={(option, value) => option?.label === value}
       disablePortal
-      onChange={(_, value) => helpers.setValue(value?.label)}
+      onChange={(_, value) => helpers.setValue(value?.label || '')}
       id={'combo-box-' + name}
       options={options}
       renderInput={(props) => (
         <TextField
-          // {...field}
           {...props}
           name={name}
           label={label}

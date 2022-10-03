@@ -60,7 +60,7 @@ const initialValues = {
   middleName: '',
   birthday: '',
   inn: '',
-  socialStatus: [],
+  socialStatus: 'відсутній',
   familySize: '',
   children: '0',
   city: '',
@@ -116,9 +116,9 @@ const RegisterForm = () => {
           mask="_"
           fullWidth
         />
-      </FormikStep>
+      </FormikStep> */}
 
-      <FormikStep
+      {/* <FormikStep
         label="Загальні відомості"
         validationSchema={yup.object({
           lastName: yup
