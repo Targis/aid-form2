@@ -1,24 +1,45 @@
-import React from 'react'
-import { useFormikContext } from 'formik'
+import React, { useEffect } from 'react'
+import { useFormikContext, useField } from 'formik'
 import TextInput from './TextInput'
 import AutocompleteField from './AutocompliteField'
 
 const StreetField = ({ streets, name, label }) => {
-  const { values } = useFormikContext()
+  const { values: { city } } = useFormikContext()
+
+  const [field, meta, helpers] = useField(name)
+  const { value } = meta
+
+  const hasOptions = city === 'м.Оріхів'
+  const isOption = streets.findIndex(item => item.label === value) > -1
+
+  let newVal = ''
+
+  if (hasOptions) {
+    newVal = isOption ? value : ''
+  } else {
+    newVal = isOption ? '' : value
+  }
+
+  useEffect(() => {
+    helpers.setValue(newVal)
+  }, [city])
+
+  if (!city) return null
+
   return (
     <>
-      {values.city === 'м.Оріхів' && (
+      {hasOptions ? (
         <AutocompleteField
           name={name}
           label={label}
           options={streets}
-          fullWidth
         />
-      )}
+      )
 
-      {values.city !== '' && values.city !== 'м.Оріхів' && (
-        <TextInput name={name} label={label} fullWidth />
-      )}
+        : (
+          <TextInput name={name} label={label}
+            fullWidth />
+        )}
     </>
 
   )
