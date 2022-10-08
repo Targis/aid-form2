@@ -12,34 +12,88 @@ import {
 
 import { useField } from 'formik'
 
-import NumberFormat from 'react-number-format'
+import { PatternFormat } from 'react-number-format'
+
+const MaskedTextField = ({
+  name,
+  label,
+  format,
+  mask,
+  formatResult,
+  ...props
+}) => {
+  const [field, meta, helpers] = useField(name)
+  const { value } = meta
+  return (
+    <PatternFormat
+      {...props}
+      name={name}
+      label={label}
+      format={format}
+      mask={mask}
+      value={formatResult ? value.replaceAll(/[.-]+/g, '') : value}
+      // valueIsNumericString={true}
+      onValueChange={(values) => {
+        const val = formatResult ? values.formattedValue : values.value
+        helpers.setValue(val)
+      }}
+      customInput={TextField}
+      sx={{ mb: 3 }}
+      variant="outlined"
+      error={meta.touched && Boolean(meta.error)}
+      helperText={(meta.touched && meta.error) || ' '}
+      fullWidth
+    />
+  )
+}
 
 const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
-  const { handleBlur, onChange, handleChange, mask, format, ...other } = props
+  const {
+    onBlur,
+    onChange,
+    mask,
+    format,
+    type,
+    isAllowed,
+    value,
+    setValue,
+    formatResult,
+    ...other
+  } = props
 
   return (
-    <NumberFormat
+    <PatternFormat
       {...other}
+      name={props.name}
       mask={mask}
       format={format}
+      type={type}
+      isAllowed={isAllowed}
+      // value={value}
+      // allowEmptyFormatting={true}
       getInputRef={ref}
       onValueChange={(values) => {
-        onChange({
-          target: {
-            name: props.name,
-            value: values.value,
-          },
-        })
+        const val = formatResult ? values.formattedValue : values.value
+        setValue(val)
       }}
     />
   )
 })
 
-export const MaskedTextField = ({ format, mask, ...props }) => {
-  const [field, meta] = useField(props.name)
-  // const { values, handleChange } = props.formik
-  const { name } = props
+export const MaskedTextField1 = ({
+  format = undefined,
+  mask = '_',
+  type = 'text',
+  name,
+  valueIsNumericString = false,
+  isAllowed = undefined,
+  formatResult,
+  ...props
+}) => {
+  const [field, meta, helpers] = useField(name)
 
+  const { setValue } = helpers
+  console.log(field)
   return (
     <>
       <TextField
@@ -47,15 +101,17 @@ export const MaskedTextField = ({ format, mask, ...props }) => {
         {...props}
         name={name}
         id={'masket-input-' + props.name}
-        // label={label}
-
-        // value={formik.values[name]}
-        // onChange={formik.handleChange}
         InputProps={{
           inputComponent: NumberFormatCustom,
           inputProps: {
+            valueIsNumericString,
             format,
             mask,
+            type,
+            isAllowed,
+            setValue,
+            formatResult,
+            value: meta.value,
           },
         }}
         sx={{ mb: 3 }}

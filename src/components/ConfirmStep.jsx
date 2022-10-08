@@ -1,13 +1,13 @@
 import React from 'react'
-import { Grid } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import { PatternFormat } from 'react-number-format'
 
 const ConfirmStep = ({ values }) => {
   const { lastName, firstName, middleName, birthday, inn, socialStatus, familySize, children, city, street, addrNum, addrCorp, addrRoom, factAddress, vpoNumber, vpoDate, phoneNumber } = values
   const getStreet = () => {
     if (city === 'м.Оріхів') {
-      const streetArr = street.split(', ')
-      return `${streetArr[1]} ${streetArr[0]}`
+      const normalizedStreet = street.split(', ').reverse().join(' ')
+      return normalizedStreet
     }
     return street
   }
@@ -58,13 +58,15 @@ const ConfirmStep = ({ values }) => {
     },
   ]
 
-
-
-
-  // console.log(values)
   return (
 
     <div style={{ textAlign: 'left', marginBottom: '2em' }}>
+
+
+      <Typography color="inherit" variant="subtitle1" component="div" sx={{ mb: 2, textAlign: 'center', fontWeight: 'bold' }}>
+        Будь ласка, перевірте правильність введених даних
+      </Typography>
+
       {summary && summary.map(item => (
         <Grid key={item.primary} container sx={{ py: 2, borderBottom: '1px solid #eee' }}>
           <Grid item xs={12} sm={4}><b>{item.primary}: </b></Grid>

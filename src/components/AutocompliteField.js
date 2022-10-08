@@ -5,7 +5,6 @@ import { useField } from 'formik'
 export default function AutocompleteField({ ...props }) {
   const { name, label, options } = props
   const [field, meta, helpers] = useField(name)
-  console.log(helpers)
   return (
     <Autocomplete
       {...field}
@@ -25,7 +24,7 @@ export default function AutocompleteField({ ...props }) {
         />
       )}
       sx={{ mb: 2 }}
-      fullWidth
+      // fullWidth
     />
   )
 }

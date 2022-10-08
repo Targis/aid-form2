@@ -246,7 +246,6 @@ export default function MultiSelectField({ ...props }) {
           )}
           MenuProps={MenuProps}
         >
-          {/* {console.log(meta)} */}
           {options.map((option) => {
             let isChecked = meta.value.includes(option)
 

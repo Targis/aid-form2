@@ -291,6 +291,10 @@ export const streetsStrings = [
 
 export const streets = [
   {
+    id: 138,
+    label: '',
+  },
+  {
     id: 0,
     label: '95-ої Гвардійської стрілецької дивізії, вулиця',
   },
@@ -841,9 +845,5 @@ export const streets = [
   {
     id: 137,
     label: 'Юрія Смірнова, провулок',
-  },
-  {
-    id: 138,
-    label: '',
   },
 ]
