@@ -16,7 +16,7 @@ const CheckField = ({ name, label, helperText, ...props }) => {
             id={'input-' + name}
             sx={{ mb: 2 }}
             checked={meta.value ? true : false}
-            fullWidth />
+          />
         }
         label={label}
         sx={{ textAlign: "left" }}
