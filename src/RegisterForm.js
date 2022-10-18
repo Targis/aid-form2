@@ -22,49 +22,17 @@ import { parseDateString } from './helpers/date'
 import { streets, cities } from './helpers/toponyms'
 import StreetField from './components/StreetField'
 import ConfirmStep from './components/ConfirmStep'
-import Confirm from './components/Confirm'
 import CheckField from './components/CheckField'
 
-import { PatternFormat } from 'react-number-format'
-
-import { TextField } from 'formik-mui'
+async function stall(stallTime = 3000) {
+  await new Promise(resolve => setTimeout(resolve, stallTime));
+}
 
 const phoneNumberRegex =
   /\(?([0-9]{3})\)?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/
 
 const today = new Date()
 const minDate = new Date('2022-02-23')
-const schema = yup.object({
-  // inn: yup
-  //   .string()
-  //   .required("Це поле обов'язкове")
-  //   .length(10, 'Це поле має містити 10 цифр'),
-  // phoneNumber: yup
-  //   .string()
-  //   .matches(phoneNumberRegex, 'Невірний формат номеру, +38(ХХХ)ХХХ-ХХ-ХХ')
-  //   .required("Це поле обов'язкове"),
-  // lastName: yup
-  //   .string()
-  //   .matches(/^\D+$/, 'Це поле не може містити числа')
-  //   .required("Це поле обов'язкове")
-  //   .min(2, 'Дуже коротке прізвище'),
-  // firstName: yup
-  //   .string()
-  //   .matches(/^\D+$/, 'Це поле не може містити числа')
-  //   .required("Це поле обов'язкове")
-  //   .min(2, "Дуже коротке ім'я"),
-  // middleName: yup
-  //   .string()
-  //   .matches(/^\D+$/, 'Це поле не може містити числа')
-  //   .required("Це поле обов'язкове")
-  //   .min(4, 'Це поле має містити щонайменше 4 символи'),
-  // birthday: yup
-  //   .date()
-  //   .required()
-  //   .transform(parseDateString)
-  //   .typeError('Будь ласка, введіть дату в такому форматі ДД-ММ-РРРР')
-  //   .max(today, 'Ви дійсно ще не народилися?'),
-})
 
 const initialValues = {
   lastName: '',
@@ -87,18 +55,6 @@ const initialValues = {
   agree: false,
 }
 
-// const summaryLabels = {
-//   fullName: "Повне ім'я",
-//   birthday: 'Дата народження',
-//   inn: 'Ідентифікаційний номер',
-//   socialStatus: 'Соціальний статус',
-//   familySize: 'Калькість дорослих',
-//   children: 'Кількість дітей',
-//   registerAddress: 'Адреса реєстрації',
-//   factAddress: 'Фактична адреса',
-//   vpo: 'Довідка ВПО',
-// }
-
 const RegisterForm = () => {
   return (
     <div style={{ marginBottom: '2em' }}>
@@ -106,12 +62,12 @@ const RegisterForm = () => {
         Форма реєстрації
       </Typography>
       <FormikStepper
-        validationSchema={schema}
         initialValues={initialValues}
         // validateOnChange={false}
         // validateOnBlur={false}
         onSubmit={async (values) => {
-          setTimeout(() => alert(JSON.stringify(values, null, 2)), 1500)
+          await stall(2000)
+          alert(JSON.stringify(values, null, 2))
         }}
       >
         <FormikStep
@@ -176,11 +132,11 @@ const RegisterForm = () => {
               .typeError('Будь ласка, введіть дату в такому форматі ДД.ММ.РРРР')
               .max(today, 'Ви дійсно ще не народилися?'),
             familySize: yup
-              .string()
+              .number()
               .required("Це поле обов'язкове")
               .min(1, 'Мінімальне значення - 1'),
             children: yup
-              .string()
+              .number()
               .required("Це поле обов'язкове. Якщо дітей немає - поставте 0.")
               .min(0, 'Мінімальне значення - 0'),
           })}
@@ -353,7 +309,9 @@ function FormikStepper({ children, ...props }) {
       onSubmit={async (values, helpers) => {
         if (isLastStep()) {
           await props.onSubmit(values, helpers)
-          setCompleted(true)
+          setCompleted(false)
+          setStep(0)
+          // helpers.resetForm()
         } else {
           setStep((s) => s + 1)
           helpers.setTouched({})
@@ -362,6 +320,7 @@ function FormikStepper({ children, ...props }) {
     >
       {({ isSubmitting, values }) => (
         <Form autoComplete="off">
+        {console.log('isSubm', isSubmitting)}
           <Stepper
             alternativeLabel
             activeStep={step}
@@ -384,7 +343,7 @@ function FormikStepper({ children, ...props }) {
 
           {step > 0 ? (
             <Button
-              disabled={isSubmitting ? true : false}
+              disabled={isSubmitting}
               color="primary"
               variant="outlined"
               size="large"
@@ -403,7 +362,7 @@ function FormikStepper({ children, ...props }) {
             size="large"
             type="submit"
           >
-            {isSubmitting ? 'Submitting' : isLastStep() ? 'Відправити' : 'Далі'}
+            {isSubmitting ? 'Відправка' : isLastStep() ? 'Відправити' : 'Далі'}
           </Button>
         </Form>
       )}
