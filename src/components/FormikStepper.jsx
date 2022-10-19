@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import ConfirmStep from './ConfirmStep'
 import { useWindowSize } from 'hooks'
-let render = 0
+
 function FormikStepper({ children, ...props }) {
   const childrenArray = React.Children.toArray(children)
   const [step, setStep] = React.useState(0)
@@ -19,8 +19,6 @@ function FormikStepper({ children, ...props }) {
   const isLastStep = () => step === childrenArray.length - 1
   const { width } = useWindowSize()
   const isMobile = width <= 576
-  render++
-  console.log(render, isMobile)
   const adaptiveStepper = isMobile ? (<Typography sx={{ mb: 3 }}>Крок {step + 1} / {childrenArray.length}</Typography>) : (
     <Stepper
       alternativeLabel
