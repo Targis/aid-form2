@@ -1,5 +1,5 @@
-import Header from './components/Header'
-import RegisterForm from './RegisterForm'
+import Header from 'components/Header'
+import RegisterForm from 'components/RegisterForm'
 import Container from '@mui/material/Container'
 import {
   GoogleReCaptchaProvider,

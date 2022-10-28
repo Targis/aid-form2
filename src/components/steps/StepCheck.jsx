@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import { useFormikContext } from 'formik';
 
 const phoneNumberRegex =
-  /\(?(0[0-9]{2})\)?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/
+  /\(?([0-9]{3})\)?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/
 
 const checkSchema = yup.object({
   inn: yup
@@ -27,7 +27,6 @@ const StepCheck = () => {
       <MaskedTextField
         name="phoneNumber"
         label="Номер телефону"
-        placeholder="Напр., 050 123 45 67"
         type="tel"
         format="+38(###)###-##-##"
         // valueIsNumericString={true}
