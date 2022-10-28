@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useFormikContext, useField } from 'formik'
-import TextInput from './TextInput'
-import AutocompleteField from './AutocompliteField'
+import TextInput from 'components/inputs/TextInput'
+import AutocompleteField from 'components/inputs/AutocompliteField'
 
 const StreetField = ({ streets, name, label }) => {
   const { values: { city } } = useFormikContext()

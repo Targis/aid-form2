@@ -8,7 +8,6 @@ import {
   CircularProgress,
   Typography
 } from '@mui/material'
-import ConfirmContent from 'components/steps/ConfirmContent'
 import Swal from 'sweetalert2'
 
 import { useWindowSize } from 'hooks'
@@ -37,7 +36,7 @@ function FormikStepper({ children, ...props }) {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data)
+            // console.log(data)
             if (data.result === 'success') {
               setStep((s) => s + 1)
               helpers.setFieldValue('checked', true)
@@ -65,10 +64,55 @@ function FormikStepper({ children, ...props }) {
         throw new Error(error)
       }
     } else if (isLastStep()) {
-      await props.onSubmit(values, helpers)
-      setCompleted(false)
-      setStep(0)
-      helpers.resetForm()
+      const data = new FormData()
+
+      Object.keys(values).forEach(key => {
+        // if (key === 'phoneNumber') {
+        //   const tel = values[key]
+        //   let formattedTel = `+38(${tel.slice(0, 3)})${tel.slice(3, 6)}-${tel.slice(6, 8)}-${tel.slice(8)}`
+        //   data.append(key, formattedTel)
+        // } else {
+        //   data.append(key, values[key])
+        // }
+        data.append(key, values[key])
+      })
+
+      try {
+        await fetch(action, {
+          method: 'POST',
+          body: data
+
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // console.log(data)
+            if (data.result === 'success') {
+              Swal.fire('Успіх!', `Ви успішно зареєструвались у черзі. Ваш номер: <br>
+              <strong style="font-size: 1.5em;">${data.number}</strong><br>
+              Цей номер потрібно зберегти (записати).`, 'success')
+              setCompleted(false)
+              setStep(0)
+              helpers.resetForm()
+
+            }
+            if (data.result === 'refused') {
+              Swal.fire('Відмова', data.reason, 'error')
+              // <p>Номер в черзі <strong>${data.number}</strong></p>
+            }
+
+            if (data.result === 'error') {
+              Swal.fire({
+                title: 'Упс...',
+                text: `Виникла помилка на сервері. Ми вже працюємо над цим. Спробуйте пізніше.
+                Текст помилки: ${data.error}. `,
+                icon: 'error',
+                confirmButtonText: 'Окей'
+              })
+            }
+          })
+      } catch (error) {
+        throw new Error(error)
+      }
     } else {
       setStep((s) => s + 1)
       helpers.setTouched({})
@@ -120,10 +164,8 @@ function FormikStepper({ children, ...props }) {
       {({ isSubmitting, values, resetForm }) => (
 
         <Form autoComplete="off">
-          {console.log(isSubmitting)}
-          {width && adaptiveStepper}
 
-          {isLastStep() && <ConfirmContent values={values} />}
+          {width && adaptiveStepper}
 
           {currentChild}
 
