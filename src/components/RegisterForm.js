@@ -37,32 +37,28 @@ const initialValues = {
 
 const RegisterForm = () => {
 
-  const [informed, setInformed] = useState(false)
-
   const { executeRecaptcha } = useGoogleReCaptcha();
-
   
   const informUser = async () => {
     const skip = localStorage.getItem('skip')
     if(skip) {
-      setInformed(true)
-    } else {
-        Swal.fire({
-          icon: 'info',
-          titleText: 'Зверніть увагу',
-          text: 'З одного номеру телефону та податковим номером можна подати лише одну заявку.',
-          input: 'checkbox',
-          inputValue: 0,
-          inputPlaceholder:
-            'Більше не показувати це',
-          confirmButtonText:
-            'Продовжити',
-            allowOutsideClick: false
-        }).then(({value: accept, isConfirmed}) => {
-          if (accept) localStorage.setItem('skip', true)
-          if (isConfirmed) setInformed(true)
-        })
-    }
+      return
+    } 
+    Swal.fire({
+      // icon: 'info',
+      titleText: 'Зверніть увагу',
+      text: 'Це тестова форма, вона нікуди вас не зареєструє. З одного номеру телефону та податковим номером можна подати лише одну заявку.',
+      input: 'checkbox',
+      inputValue: 0,
+      inputPlaceholder:
+        'Більше не показувати це',
+      confirmButtonText:
+        'Продовжити',
+        allowOutsideClick: false
+    }).then(({value: accept, isConfirmed}) => {
+      if (accept) localStorage.setItem('skip', true)
+    })
+
   }
 
   const handleReCaptchaVerify = useCallback(async () => {
@@ -84,7 +80,7 @@ const RegisterForm = () => {
       <Typography color="inherit" variant="h6" component="div" sx={{ mb: 4 }}>
         Форма реєстрації
       </Typography>
-      {informed && (
+
       <FormikStepper
         initialValues={initialValues}
         // validateOnChange={false}
@@ -99,7 +95,7 @@ const RegisterForm = () => {
           <StepVPO label="ВПО" validationSchema={vpoSchema} />
           <StepConfirm label="Підтвердіть" validationSchema={confirmSchema} />
       </FormikStepper>
-      )}
+      
     </div>
   )
 }

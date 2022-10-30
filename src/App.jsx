@@ -10,11 +10,20 @@ function App() {
     <div className="App">
       <Header />
       <Container spacing="2" maxWidth="sm" direction="column">
-        <GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_SITE_KEY} >
+        <GoogleReCaptchaProvider
+          reCaptchaKey={process.env.REACT_APP_SITE_KEY}
+          container={{
+            element: "recaptcha",
+            parameters: {
+              badge: '',
+              size: 'invisible',
+            }
+          }}
+        >
           <RegisterForm />
         </GoogleReCaptchaProvider>
       </Container>
-    </div>
+    </div >
   )
 }
 

@@ -67,14 +67,8 @@ function FormikStepper({ children, ...props }) {
       const data = new FormData()
 
       Object.keys(values).forEach(key => {
-        // if (key === 'phoneNumber') {
-        //   const tel = values[key]
-        //   let formattedTel = `+38(${tel.slice(0, 3)})${tel.slice(3, 6)}-${tel.slice(6, 8)}-${tel.slice(8)}`
-        //   data.append(key, formattedTel)
-        // } else {
-        //   data.append(key, values[key])
-        // }
-        data.append(key, values[key])
+        if (key !== 'agree' && key !== 'checked')
+          data.append(key, values[key])
       })
 
       try {
@@ -116,6 +110,7 @@ function FormikStepper({ children, ...props }) {
     } else {
       setStep((s) => s + 1)
       helpers.setTouched({})
+      window.scrollTo(0, 0)
     }
   }
 
@@ -133,11 +128,20 @@ function FormikStepper({ children, ...props }) {
       if (result.isConfirmed) {
         resetForm()
         setStep(0)
+        Swal.fire({
+          icon: 'success',
+          title: 'Форму очищено',
+          toast: true,
+          position: 'bottom-start',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        })
       }
     })
   }
 
-  const adaptiveStepper = isMobile ? (<Typography sx={{ mb: 3 }}>Крок {step + 1} / {childrenArray.length}</Typography>) : (
+  const adaptiveStepper = isMobile ? (<Typography sx={{ mb: 3 }}>Крок {step + 1} / {childrenArray.length}. {currentChild?.props?.label}</Typography>) : (
     <Stepper
       alternativeLabel
       activeStep={step}
@@ -169,40 +173,47 @@ function FormikStepper({ children, ...props }) {
 
           {currentChild}
 
-          <Button
-            disabled={isSubmitting}
-            color="error"
-            variant="outlined"
-            size="large"
-            onClick={() => handleReset(resetForm)}
-            sx={{ mr: 3 }}
-          >
-            Очистити
-          </Button>
-
-          {step > 0 ? (
+          <div className="form-nav__container">
             <Button
               disabled={isSubmitting}
-              color="primary"
+              color="error"
               variant="outlined"
               size="large"
-              onClick={() => setStep((s) => s - 1)}
-              sx={{ mr: 3 }}
+              onClick={() => handleReset(resetForm)}
+              sx={{ mr: 1.5, mb: 2 }}
             >
-              Назад
+              Очистити
             </Button>
-          ) : null}
 
-          <Button
-            startIcon={isSubmitting ? <CircularProgress size="1rem" /> : null}
-            disabled={isSubmitting}
-            variant="contained"
-            color="primary"
-            size="large"
-            type="submit"
-          >
-            {isSubmitting ? 'Завантаження' : isLastStep() ? 'Відправити' : 'Далі'}
-          </Button>
+            {step > 0 ? (
+              <Button
+                disabled={isSubmitting}
+                color="primary"
+                variant="outlined"
+                size="large"
+                onClick={() => {
+                  setStep((s) => s - 1)
+                  window.scrollTo(0, 0)
+                }}
+                sx={{ mr: 1.5, mb: 2 }}
+              >
+                Назад
+              </Button>
+            ) : null}
+
+            <Button
+              startIcon={isSubmitting ? <CircularProgress size="1rem" /> : null}
+              disabled={isSubmitting}
+              variant="contained"
+              color="primary"
+              size="large"
+              type="submit"
+              sx={{ mb: 2 }}
+            >
+              {isSubmitting ? 'Завантаження' : isLastStep() ? 'Відправити' : 'Далі'}
+            </Button>
+          </div>
+
         </Form>
       )}
     </Formik>
