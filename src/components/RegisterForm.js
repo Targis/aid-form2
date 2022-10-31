@@ -37,15 +37,14 @@ const initialValues = {
 
 const RegisterForm = () => {
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  // const { executeRecaptcha } = useGoogleReCaptcha();
   
-  const informUser = async () => {
+  const informUser = useCallback(async () => {
     const skip = localStorage.getItem('skip')
     if(skip) {
       return
     } 
-    Swal.fire({
-      // icon: 'info',
+    await Swal.fire({
       titleText: 'Зверніть увагу',
       text: 'Це тестова форма, вона нікуди вас не зареєструє. З одного номеру телефону та податковим номером можна подати лише одну заявку.',
       input: 'checkbox',
@@ -59,20 +58,23 @@ const RegisterForm = () => {
       if (accept) localStorage.setItem('skip', true)
     })
 
-  }
+  })
 
-  const handleReCaptchaVerify = useCallback(async () => {
-    if (!executeRecaptcha) {
-      console.log('Execute recaptcha not yet available');
-      return;
-    }
-    // const token = await executeRecaptcha('someAction');
-  }, [executeRecaptcha]);
+  // const handleReCaptchaVerify = useCallback(async () => {
+  //   if (!executeRecaptcha) {
+  //     console.log('Execute recaptcha not yet available');
+  //     return;
+  //   }
+  //   // const token = await executeRecaptcha('someAction');
+  // }, [executeRecaptcha]);
+
+  // useEffect(() => {
+  //   handleReCaptchaVerify();
+  // }, [handleReCaptchaVerify]);
 
   useEffect(() => {
-    handleReCaptchaVerify();
     informUser()
-  }, [handleReCaptchaVerify]);
+  }, [informUser]);
 
   return (
     <div style={{ marginBottom: '2em' }}>
