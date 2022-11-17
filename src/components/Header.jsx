@@ -22,11 +22,11 @@ const drawerWidth = 240;
 const navItems = [
   {
     label: 'Реєстрація',
-    href: 'aid-form2/register'
+    href: 'orikhiv-aid/register'
   },
   {
     label: 'Нагадати номер',
-    href: 'aid-form2/reminder'
+    href: 'orikhiv-aid/reminder'
   }
 ];
 
@@ -79,7 +79,7 @@ function DrawerAppBar(props) {
               variant="title"
               sx={{ position: 'relative', ml: 0.5, mr: 2.5, color: '#fff', textDecoration: 'none' }}
               component={NavLink}
-              to="aid-form2"
+              to="orikhiv-aid"
             >
               Оріхівська громада
               <UkraineIcon

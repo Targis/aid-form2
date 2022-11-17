@@ -1,8 +1,8 @@
 {
-  "name": "aid-form2",
+  "name": "orikhiv-aid",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://targis.github.io/aid-form2",
+  "homepage": "http://targis.github.io/orikhiv-aid",
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",

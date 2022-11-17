@@ -30,7 +30,7 @@ function App() {
           >
             <Routes>
               <Route index element={<Home />} />
-              <Route path="aid-form2">
+              <Route path="orikhiv-aid">
                 <Route index element={<Home />} />
                 <Route path="register" element={<RegisterForm />} />
                 <Route path="reminder" element={<ReminderForm />} />
