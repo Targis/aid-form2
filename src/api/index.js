@@ -1,4 +1,4 @@
 // TODO add action
-const key = 'AKfycbz9KyKUDRMPwV-CeUVDrOfpAY4WgvNkscnwqw0YfJz_B1_AeAyIbhELinqUaNegvWFr8Q'
+const key = 'AKfycbyZMMccNvJpqQMnR6vw4aE5_XyBe1RttzCAWby9wqasH_8AjBTmJpRaAqqafXu5yruB'
 export const action = `https://script.google.com/macros/s/${key}/exec`
                                
