@@ -36,29 +36,49 @@ function FormikStepper({ children, ...props }) {
         })
           .then((response) => response.json())
           .then((data) => {
-            // console.log(data)
-            if (data.result === 'success') {
-              setStep((s) => s + 1)
-              helpers.setFieldValue('checked', true)
-              helpers.setTouched({})
-            }
-            if (data.result === 'refused') {
-              Swal.fire('Відмова', data.reason, 'error')
-              helpers?.resetForm()
-              setStep(0)
-              // <p>Номер в черзі <strong>${data.number}</strong></p>
+            console.log(data)
+            switch (data?.result) {
+              case 'notFoundAll':
+                setStep((s) => s + 1)
+                helpers.setFieldValue('checked', true)
+                helpers.setTouched({})
+                break
+              case 'success':
+                Swal.fire('Увага!', `Ви вже реєструвалися. Ваш номер: ${data?.number}`, 'warning')
+                helpers?.resetForm()
+                setStep(0)
+                break
+              case 'different':
+                Swal.fire('Невідповідність даних', 'Такі дані вже є в базі, але номер телефону і податковий номер не співпадають. Перевірте правильність введених даних. Якщо ви вважаєте це помилкою, зверніться у хаб з оригіналами документів. ', 'error')
+                helpers?.resetForm()
+                setStep(0)
+                break
+              case 'notFoundOne':
+                Swal.fire('Відмова', 'Такий номер телефону або податковий номер вже був зареєстрований в базі.', 'error')
+                helpers?.resetForm()
+                setStep(0)
+                break
+              case 'invalidInn':
+                Swal.fire('Увага!', 'Такий номер телефону вже є в базі, але в нас відсутні деякі ваші дані. Звеніться у хаб з оригіналами паспорта, коду та довідки ВПО, щоб надалі мати змогу отримувати гуманітарну допомогу!', 'warning')
+                helpers?.resetForm()
+                setStep(0)
+                break
+              case 'error':
+                Swal.fire({
+                  title: 'Упс...',
+                  text: `Помилка на сервері: ${data.error}`,
+                  icon: 'error',
+                  confirmButtonText: 'Спробувати ще'
+                })
+                helpers?.resetForm()
+                setStep(0)
+                break
+              default:
+                Swal.fire('Внутрішня помилка', 'Зв\'яжіться з адміністратором', 'error')
+                helpers?.resetForm()
+                setStep(0)
             }
 
-            if (data.result === 'error') {
-              Swal.fire({
-                title: 'Упс...',
-                text: `Помилка на сервері: ${data.error}`,
-                icon: 'error',
-                confirmButtonText: 'Спробувати ще'
-              })
-              helpers?.resetForm()
-              setStep(0)
-            }
           })
       } catch (error) {
         throw new Error(error)
@@ -80,6 +100,7 @@ function FormikStepper({ children, ...props }) {
           .then((response) => response.json())
           .then((data) => {
             // console.log(data)
+
             if (data.result === 'success') {
               Swal.fire('Успіх!', `Ви успішно зареєструвались у черзі. Ваш номер: <br>
               <strong style="font-size: 1.5em;">${data.number}</strong><br>
