@@ -23,3 +23,18 @@ code {
   display: flex;
   justify-content: space-between;
 }
+
+.MuiAppBar-root .MuiButtonBase-root {
+  position: "relative";
+}
+
+.MuiAppBar-root .MuiButtonBase-root.active::before {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 8px;
+  right: 8px;
+  bottom: 5px;
+  height: 2px;
+  background-color: #fff;
+}
