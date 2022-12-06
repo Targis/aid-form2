@@ -12,6 +12,7 @@ import Swal from 'sweetalert2'
 
 import { useWindowSize } from 'hooks'
 import { action } from 'api'
+import { getFormData } from 'helpers/normalizeData'
 
 function FormikStepper({ children, ...props }) {
   const childrenArray = React.Children.toArray(children)
@@ -84,12 +85,14 @@ function FormikStepper({ children, ...props }) {
         throw new Error(error)
       }
     } else if (isLastStep()) {
-      const data = new FormData()
+      const toNormalize = ['firstName', 'lastName', 'middleName', 'street']
+      const toExclude = ['agree', 'checked']
 
-      Object.keys(values).forEach(key => {
-        if (key !== 'agree' && key !== 'checked')
-          data.append(key, values[key])
-      })
+      const data = getFormData(
+        values,
+        toNormalize,
+        toExclude
+      )
 
       try {
         await fetch(action, {
