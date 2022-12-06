@@ -10,18 +10,13 @@ import * as yup from 'yup'
 const addressSchema = yup.object({
   city: yup.string().required("Це поле обов'язкове"),
   street: yup.string().required("Це поле обов'язкове"),
-  addrNum: yup.string().required("Це поле обов'язкове"),
+  addrNum: yup.number().required("Це поле обов'язкове").min(1, 'Мінімальне значення - 1'),
+  addrRoom: yup.number().min(1, 'Мінімальне значення - 1'),
 })
 
 const StepAddress = () => {
   return (
-    <FormikStep
-    // validationSchema={yup.object({
-    //   city: yup.string().required("Це поле обов'язкове"),
-    //   street: yup.string().required("Це поле обов'язкове"),
-    //   addrNum: yup.string().required("Це поле обов'язкове"),
-    // })}
-    >
+    <FormikStep>
       <SelectInput
         name="city"
         label="Населений пункт"
