@@ -6,8 +6,10 @@ import { Grid } from '@mui/material'
 
 import * as yup from 'yup'
 import { parseDateString } from 'helpers/date'
+import { add } from 'date-fns'
 
 const today = new Date()
+const minDate = add(today, { years: -18 })
 
 const personalSchema = yup.object({
   lastName: yup
@@ -30,7 +32,7 @@ const personalSchema = yup.object({
     .required("Це поле обов'язкове")
     .transform(parseDateString)
     .typeError('Будь ласка, введіть дату в такому форматі ДД.ММ.РРРР')
-    .max(today, 'Ви дійсно ще не народилися?'),
+    .max(minDate, 'Мінімальний вік 18 років'),
   familySize: yup
     .number()
     .required("Це поле обов'язкове")
@@ -42,6 +44,7 @@ const personalSchema = yup.object({
 })
 
 const StepPersonal = () => {
+  console.log(minDate)
   return (
     <FormikStep>
       <TextInput name="lastName" label="Прізвище" fullWidth />
