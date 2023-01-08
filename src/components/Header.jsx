@@ -95,16 +95,6 @@ function DrawerAppBar(props) {
                 }}
               />
             </Typography>
-            <Typography
-              color="inherit"
-              component={NavLink}
-              to="orikhiv-aid/e-queue"
-              sx={{
-                width: '5px',
-                height: '5px'
-              }}
-            > </Typography>
-
 
           </Box>
           <IconButton
