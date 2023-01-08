@@ -35,7 +35,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="register" element={<RegisterForm />} />
                 <Route path="reminder" element={<ReminderForm />} />
-                <Route path="queue" element={<QueueForm />} />
+                <Route path="e-queue" element={<QueueForm />} />
               </Route>
 
             </Routes>
