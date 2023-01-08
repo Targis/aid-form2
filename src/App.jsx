@@ -7,7 +7,9 @@ import Home from 'components/Home'
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
+  Navigate,
+  NavLink
 } from "react-router-dom";
 import {
   GoogleReCaptchaProvider,
@@ -30,13 +32,17 @@ function App() {
             }}
           >
             <Routes>
-              <Route index element={<Home />} />
-              <Route path="orikhiv-aid">
-                <Route index element={<Home />} />
-                <Route path="register" element={<RegisterForm />} />
-                <Route path="reminder" element={<ReminderForm />} />
-                <Route path="e-queue" element={<QueueForm />} />
-              </Route>
+              <Route path="/" element={<Navigate to="/orikhiv-aid" />} />
+              <Route path="/orikhiv-aid" element={<Home />} />
+
+              <Route path="/orikhiv-aid/register" element={<RegisterForm />} />
+              <Route path="/orikhiv-aid/reminder" element={<ReminderForm />} />
+              <Route path="/orikhiv-aid/queue" element={<QueueForm />} />
+              <Route path="*" element={
+                <div>Помилка 404. Сторінку не знайдено. <br />
+                  <NavLink to="/orikhiv-aid">Повернутись на головну</NavLink> </div>
+              } />
+
 
             </Routes>
 
