@@ -1,6 +1,7 @@
 import Header from 'components/Header'
 import RegisterForm from 'components/RegisterForm'
 import ReminderForm from 'components/ReminderForm'
+import QueueForm from 'components/QueueForm'
 import Container from '@mui/material/Container'
 import Home from 'components/Home'
 import {
@@ -34,6 +35,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="register" element={<RegisterForm />} />
                 <Route path="reminder" element={<ReminderForm />} />
+                <Route path="queue" element={<QueueForm />} />
               </Route>
 
             </Routes>
@@ -42,7 +44,7 @@ function App() {
         </Container>
       </BrowserRouter>
 
-    </div >
+    </div>
   )
 }
 

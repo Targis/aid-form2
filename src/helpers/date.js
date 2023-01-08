@@ -7,3 +7,5 @@ export function parseDateString(value, originalValue) {
 
   return parsedDate
 }
+
+export const dayNames = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота']
