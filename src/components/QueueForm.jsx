@@ -167,8 +167,8 @@ const QueueForm = () => {
       >
         {({ values, isSubmitting, handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
-            <TextInput name="last_name" label="Прізвище" fullWidth />
-            <TextInput name="first_name" label="Ім'я" fullWidth />
+            <TextInput name="last_name" label="Прізвище" sx={{ mb: 1 }} fullWidth />
+            <TextInput name="first_name" label="Ім'я" sx={{ mb: 1 }} fullWidth />
             <TextInput name="middle_name" label="По-батькові" fullWidth />
             <MaskedTextField
               name="tel"
@@ -192,6 +192,7 @@ const QueueForm = () => {
                   formatResult={true}
                   mask="_"
                   type="tel"
+                  sx={{ mb: 1 }}
                   fullWidth
                 />
               </Grid>

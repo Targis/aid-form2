@@ -11,6 +11,7 @@ const MaskedTextField = ({
   ...props
 }) => {
   const [field, meta, helpers] = useField(name)
+  const sx = props?.sx || null
 
   return (
     <PatternFormat
@@ -26,7 +27,7 @@ const MaskedTextField = ({
         helpers.setValue(val)
       }}
       customInput={TextField}
-      sx={{ mb: 3 }}
+      sx={sx ? { sx } : { mb: 3 }}
       variant="outlined"
       error={meta.touched && Boolean(meta.error)}
       helperText={(meta.touched && meta.error) || ' '}
