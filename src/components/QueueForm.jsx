@@ -23,6 +23,7 @@ const initialValues = {
   last_name: '',
   first_name: '',
   middle_name: '',
+  inn: '',
   tel: '',
   vpoNumber: '',
   vpoDate: '',
@@ -55,11 +56,15 @@ const validationSchema = yup.object({
     .min(4, 'Це поле має містити щонайменше 4 символи'),
   tel: yup
     .string()
+    .required("Це поле обов'язкове")
     .matches(
       phoneNumberRegex,
       'Невірний формат номеру, (0ХХ)ХХХ-ХХ-ХХ'
-    )
-    .required("Це поле обов'язкове"),
+    ),
+  inn: yup
+    .string()
+    .required("Це поле обов'язкове")
+    .length(10, 'Це поле має містити 10 цифр'),
   vpoNumber: yup
     .string()
     .required("Це поле обов'язкове")
@@ -113,7 +118,7 @@ const QueueForm = () => {
                 </table>
   
                 <br><br>
-                <b> Адреса реєстрації:</b> м. Запоріжжя, вул. Лермонтова, 9 (в будівлі БК "Орбіта" з протилежної сторони головного входу).<br><br>
+                <b> Адреса реєстрації:</b> м. Запоріжжя, вул. Лермонтова, 9 (в будівлі БК "Орбіта" з протилежної сторони від головного входу). НЕ в Просторі Єдності!<br><br>
                 Номер в черзі дійсний тільки в цей день. <br><br>
                 * - через повітряні тривоги, перебої з електрикою та інші обставини час може бути змінено адміністратором.
                 </div>
@@ -141,6 +146,7 @@ const QueueForm = () => {
               icon: 'error',
               confirmButtonText: 'Закрити'
             })
+            helpers?.setSubmitting(false)
           }
         })
     } catch (error) {
@@ -167,7 +173,7 @@ const QueueForm = () => {
       </Typography>
 
       <Typography color="inherit" variant="p" component="div" sx={{ mb: 4, textAlign: 'left' }}>
-        <b>Місце реєстрації:</b> м. Запоріжжя Лермонтова, 9 (в будівлі БК "Орбіта" з протилежної сторони головного входу).
+        <b>Місце реєстрації:</b> м. Запоріжжя Лермонтова, 9 (в будівлі БК "Орбіта" з протилежної сторони від головного входу). НЕ в Просторі Єдності!
       </Typography>
 
       <Formik
@@ -184,17 +190,34 @@ const QueueForm = () => {
             <TextInput name="last_name" label="Прізвище" fullWidth />
             <TextInput name="first_name" label="Ім'я" fullWidth />
             <TextInput name="middle_name" label="По-батькові" fullWidth />
-            <MaskedTextField
-              name="tel"
-              label="Номер телефону"
-              type="tel"
-              format="+38(###)###-##-##"
-              // valueIsNumericString={true}
-              mask="_"
-              formatResult={true}
-              fullWidth
-              disabled={values?.checked}
-            />
+
+            <Grid container columnSpacing={2} columns={12}>
+              <Grid item xs={12} sm={6}>
+                <MaskedTextField
+                  name="tel"
+                  label="Номер телефону"
+                  type="tel"
+                  format="+38(###)###-##-##"
+                  // valueIsNumericString={true}
+                  mask="_"
+                  formatResult={true}
+                  fullWidth
+                  disabled={values?.checked}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <MaskedTextField
+                  name="inn"
+                  label="Податковий номер (РНОКПП)"
+                  format="##########"
+                  type="tel"
+                  mask="_"
+                  valueIsNumericString={true}
+                  fullWidth
+                  disabled={values?.checked}
+                />
+              </Grid>
+            </Grid>
 
             <Grid container columnSpacing={2} columns={12}>
               <Grid item xs={12} sm={7}>
