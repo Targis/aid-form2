@@ -38,12 +38,11 @@ function App() {
               <Route path="/orikhiv-aid/register" element={<RegisterForm />} />
               <Route path="/orikhiv-aid/reminder" element={<ReminderForm />} />
               <Route path="/orikhiv-aid/queue" element={<QueueForm />} />
+
               <Route path="*" element={
                 <div>Помилка 404. Сторінку не знайдено. <br />
                   <NavLink to="/orikhiv-aid">Повернутись на головну</NavLink> </div>
               } />
-
-
             </Routes>
 
           </GoogleReCaptchaProvider>
