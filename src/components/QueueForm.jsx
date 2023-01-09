@@ -101,23 +101,30 @@ const QueueForm = () => {
             // const dateString = format(parseISO(data?.date), 'dd.MM.yyyy')
             // const time = format(parseISO(data?.time), 'hh:mm')
             Swal.fire(
-              '',
-              `<div style='text-align: left'>
-              <table style='margin: '0 auto'>
-                <tbody>
-                  <tr><td>Ваш №: </td>           <th>${number}</strong></th></tr>
-                  <tr><td>Дата: </td>            <th>${date} (${day.toLowerCase()})</th></tr>
-                  <tr><td>Час*: </td>            <th>${time} </th></tr>
-                </tbody>
-              </table>
-
-              <br><br>
-              <b> Адреса реєстрації:</b> м. Запоріжжя Лермонтова, 9 (в будівлі БК "Орбіта" з протилежної сторони головного входу).<br><br>
-              Номер в черзі дійсний тільки в цей день. <br><br>
-              * - Через повітряні тривоги, перебої з електрикою та інші обставини час може бути перенесено адміністратором.
-              </div>
-              `,
-              'success')
+              {
+                html:
+                  `<div style='text-align: left'>
+                <table style='margin: 0 auto; border: 2px solid #a5dc86; padding: 0.5em; border-spacing: 10px;'>
+                  <tbody>
+                    <tr><td>Ваш №: </td>           <th> ${number}</strong></th></tr>
+                    <tr><td>Дата: </td>            <th> ${date} (${day.toLowerCase()})</th></tr>
+                    <tr><td>Час*: </td>            <th> ${time} </th></tr>
+                  </tbody>
+                </table>
+  
+                <br><br>
+                <b> Адреса реєстрації:</b> м. Запоріжжя, вул. Лермонтова, 9 (в будівлі БК "Орбіта" з протилежної сторони головного входу).<br><br>
+                Номер в черзі дійсний тільки в цей день. <br><br>
+                * - через повітряні тривоги, перебої з електрикою та інші обставини час може бути змінено адміністратором.
+                </div>
+                `,
+                icon: 'success',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                confirmButtonText: 'Закрити'
+              })
             helpers?.resetForm()
 
           }
