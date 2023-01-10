@@ -4,6 +4,7 @@ import { Formik, Form } from 'formik'
 import Swal from 'sweetalert2'
 import TextInput from 'components/inputs/TextInput'
 import MaskedTextField from 'components/inputs/MaskedTextField'
+import CheckField from 'components/inputs/CheckField'
 import { CircularProgress, Button } from '@mui/material'
 import { getFormData } from 'helpers/normalizeData'
 import { dayNames } from 'helpers/date'
@@ -76,6 +77,9 @@ const validationSchema = yup.object({
     .typeError('Будь ласка, введіть дату в такому форматі ДД.ММ.РРРР')
     .min(oneDayBeforeMinDate, `Мінімальна дата ${format(minDate, 'dd.MM.yyyy')}`)
     .max(today, 'Дата з майбутнього? 🤔'),
+  agree: yup
+    .boolean()
+    .oneOf([true], 'Щоб продовжити, необхідно надати згоду'),
 })
 
 const QueueForm = () => {
@@ -245,6 +249,12 @@ const QueueForm = () => {
                 />
               </Grid>
             </Grid>
+
+            <CheckField
+              name="agree"
+              label="Підтверджую правильність введених даних та даю згоду на обробку персональних даних"
+              sx={{ mb: 2, textAlign: 'left' }}
+            />
 
             <Button
               startIcon={isSubmitting ? <CircularProgress size="1rem" /> : null}
