@@ -6,7 +6,7 @@ const CheckField = ({ name, label, helperText, ...props }) => {
   const [field, meta] = useField(name)
 
   return (
-    <FormControl error={meta.touched && Boolean(meta.error)} sx={{ mb: 2 }} >
+    <FormControl error={meta.touched && Boolean(meta.error)} sx={{ mb: 2 }} fullWidth>
 
       <FormControlLabel
         control={
@@ -14,7 +14,7 @@ const CheckField = ({ name, label, helperText, ...props }) => {
             {...field}
             name={name}
             id={'input-' + name}
-            sx={{ mb: 2 }}
+            // sx={{ mb: 2 }}
             checked={meta.value ? true : false}
           />
         }

@@ -27,7 +27,7 @@ const MaskedTextField = ({
         helpers.setValue(val)
       }}
       customInput={TextField}
-      sx={sx ? { sx } : { mb: 3 }}
+      sx={sx ? { sx } : { mb: 2 }}
       variant="outlined"
       error={meta.touched && Boolean(meta.error)}
       helperText={(meta.touched && meta.error) || ' '}

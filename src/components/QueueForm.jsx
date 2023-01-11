@@ -222,7 +222,7 @@ const QueueForm = () => {
 
       {!service && (
         <>
-          <Typography color="inherit" variant="h4" component="div" sx={{ mb: 4 }}>
+          <Typography color="inherit" variant="h5" component="div" sx={{ mb: 4 }}>
             Електронна черга
           </Typography>
 
@@ -247,7 +247,7 @@ const QueueForm = () => {
         </>
       )}
 
-      {isClosed && !isLoading && ('На даний момент форма закрита. Черга сформована або запис ще не розпочався.')}
+      {isClosed && !isLoading && ('Форма закрита. Черга сформована або запис ще не розпочався.')}
 
       {isFormVisible && (
         <>
