@@ -36,7 +36,7 @@ const phoneNumberRegex =
   /\(?([0-9]{3})\)?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/
 
 const today = new Date()
-const minDate = new Date('2022-10-01')
+const minDate = new Date('2022-02-24')
 const oneDayBeforeMinDate = addDays(minDate, -1)
 
 const validationSchema = yup.object({
