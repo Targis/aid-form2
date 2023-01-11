@@ -36,7 +36,7 @@ const ReminderForm = () => {
             case 'success':
               Swal.fire({
                 title: `${data.number}`,
-                text: `Ваш номер в черзі`,
+                text: `Ваш номер в базі`,
                 icon: 'info',
                 confirmButtonText: 'Дякую'
               })
