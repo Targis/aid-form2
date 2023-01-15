@@ -18,7 +18,7 @@ const SimpleSelect = ({ setOption, options, current = '' }) => {
         <Select
           value={current}
           onChange={handleChange}
-          label="Оберіть сервіс"
+          label="Оберіть послугу"
         >
           {/* <MenuItem value="">
             <em>---</em>

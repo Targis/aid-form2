@@ -17,6 +17,9 @@ import { hubAction } from 'api'
 import * as yup from 'yup'
 import { parseDateString } from 'helpers/date'
 
+//TEST
+// import StormTest from './StormTest'
+
 // async function stall(stallTime = 3000) {
 //   await new Promise(resolve => setTimeout(resolve, stallTime));
 // }
@@ -158,10 +161,11 @@ const QueueForm = () => {
             case 'closed':
               Swal.fire({
                 title: 'Відхилено',
-                text: `Нажаль, черга вже сформована і форма закрита. Слідкуйте за оголошеннями.`,
+                text: `Форма закрита. Черга сформована або запис ще не розпочався.`,
                 icon: 'error',
                 confirmButtonText: 'Закрити'
               })
+              helpers?.resetForm()
               break
             case 'success':
               const { number, date, time } = data
@@ -192,15 +196,20 @@ const QueueForm = () => {
                 allowEnterKey: false,
                 confirmButtonText: 'Закрити'
               })
+              helpers?.resetForm()
               break
             case 'refused':
-              Swal.fire('', 'Немає вільних місць на цю дату. Спробуйте пізніше.', 'error')
+              Swal.fire('Відхилено', 'Нажаль, черга вже сформована. Слідкуйте за оголошеннями.', 'error')
+              helpers?.resetForm()
+              break
+            case 'timeout':
+              Swal.fire('', 'Перевищено час очікування. Спробуйте ще.', 'warning')
               break
             case 'error':
+              console.log('error', data.error)
               Swal.fire({
                 title: 'Помилка',
-                text: `Виникла помилка на сервері. Ми вже працюємо над цим. Спробуйте пізніше.
-                  Текст помилки: ${data.error}. `,
+                text: `Спробуйте пізніше.`,
                 icon: 'error',
                 confirmButtonText: 'Закрити'
               })
@@ -212,8 +221,7 @@ const QueueForm = () => {
     } catch (error) {
       throw new Error(error)
     } finally {
-      helpers?.resetForm()
-      // helpers?.setSubmitting(false)
+      helpers?.setSubmitting(false)
     }
   }
 
@@ -238,7 +246,8 @@ const QueueForm = () => {
         </>
       )}
 
-      {/* {isLoading ? ('Loading...') : isClosed && ('На даний час форма закрита. ')} */}
+
+      {/* <StormTest count={10} /> */}
 
       {service && isLoading && (
         <>
