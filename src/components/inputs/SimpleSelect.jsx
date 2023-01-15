@@ -14,11 +14,11 @@ const SimpleSelect = ({ setOption, options, current = '' }) => {
   return (
     <div>
       <FormControl variant="outlined" sx={{ m: 1, minWidth: 320 }}>
-        <InputLabel>Оберіть сервіс</InputLabel>
+        <InputLabel>Оберіть послугу</InputLabel>
         <Select
           value={current}
           onChange={handleChange}
-          label="Оберіть сервіс"
+          label="Оберіть послугу"
         >
           {/* <MenuItem value="">
             <em>---</em>
