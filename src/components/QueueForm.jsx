@@ -163,9 +163,15 @@ const QueueForm = () => {
                 title: 'Відхилено',
                 text: `Форма закрита. Черга сформована або запис ще не розпочався.`,
                 icon: 'error',
-                confirmButtonText: 'Закрити'
+                confirmButtonText: 'Закрити',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  helpers?.resetForm()
+                  window.location.reload()
+                }
               })
-              helpers?.resetForm()
               break
             case 'success':
               const { number, date, time } = data
