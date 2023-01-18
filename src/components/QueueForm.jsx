@@ -205,8 +205,19 @@ const QueueForm = () => {
               helpers?.resetForm()
               break
             case 'refused':
-              Swal.fire('Відхилено', 'Нажаль, черга вже сформована. Слідкуйте за оголошеннями.', 'error')
-              helpers?.resetForm()
+              Swal.fire({
+                title: 'Відхилено',
+                text: `Нажаль, черга вже сформована. Слідкуйте за оголошеннями.`,
+                icon: 'error',
+                confirmButtonText: 'Закрити',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  helpers?.resetForm()
+                  window.location.reload()
+                }
+              })
               break
             case 'timeout':
               Swal.fire('', 'Перевищено час очікування. Спробуйте ще.', 'warning')
