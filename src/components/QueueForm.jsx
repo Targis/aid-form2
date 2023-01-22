@@ -6,6 +6,7 @@ import TextInput from 'components/inputs/TextInput'
 import MaskedTextField from 'components/inputs/MaskedTextField'
 import CheckField from 'components/inputs/CheckField'
 import SimpleSelect from 'components/inputs/SimpleSelect'
+// import QueueInformer from './QueueInformer'
 import { CircularProgress, Button } from '@mui/material'
 import { getFormData } from 'helpers/normalizeData'
 import { dayNames } from 'helpers/date'
@@ -245,6 +246,8 @@ const QueueForm = () => {
   return (
     <div style={{ marginBottom: '2em' }}>
 
+      {/* <QueueInformer /> */}
+
       {!service && (
         <>
           <Typography color="inherit" variant="h5" component="div" sx={{ mb: 4 }}>
@@ -297,82 +300,95 @@ const QueueForm = () => {
             }}
           >
             {({ values, isSubmitting, handleSubmit }) => (
+
               <Form onSubmit={handleSubmit}>
-                <TextInput name="last_name" label="Прізвище" fullWidth />
-                <TextInput name="first_name" label="Ім'я" fullWidth />
-                <TextInput name="middle_name" label="По-батькові" fullWidth />
 
-                <Grid container columnSpacing={2} columns={12}>
-                  <Grid item xs={12} sm={6}>
-                    <MaskedTextField
-                      name="tel"
-                      label="Номер телефону"
-                      type="tel"
-                      format="+38(###)###-##-##"
-                      // valueIsNumericString={true}
-                      mask="_"
-                      formatResult={true}
-                      fullWidth
-                      disabled={values?.checked}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <MaskedTextField
-                      name="inn"
-                      label="Податковий номер (РНОКПП)"
-                      format="##########"
-                      type="tel"
-                      mask="_"
-                      valueIsNumericString={true}
-                      fullWidth
-                      disabled={values?.checked}
-                    />
-                  </Grid>
-                </Grid>
+                {isSubmitting ? (
+                  <>
+                    <div>Шукаємо вільне місце. Не закривайте це вікно.</div> <br />
+                    <CircularProgress size="3rem" />
+                  </>
+                ) : (
+                  <>
+                    <TextInput name="last_name" label="Прізвище" fullWidth />
+                    <TextInput name="first_name" label="Ім'я" fullWidth />
+                    <TextInput name="middle_name" label="По-батькові" fullWidth />
 
-                <Grid container columnSpacing={2} columns={12}>
-                  <Grid item xs={12} sm={7}>
-                    <MaskedTextField
-                      name="vpoNumber"
-                      label="Номер довідки ВПО"
-                      format="####-##########"
-                      // valueIsNumericString={true}
-                      formatResult={true}
-                      mask="_"
-                      type="tel"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={5}>
-                    <MaskedTextField
-                      name="vpoDate"
-                      label="Дата видачі довідки"
-                      format="##.##.####"
-                      mask="_"
-                      type="tel"
-                      // valueIsNumericString={true}
-                      formatResult={true}
-                      fullWidth
-                    />
-                  </Grid>
-                </Grid>
+                    <Grid container columnSpacing={2} columns={12}>
+                      <Grid item xs={12} sm={6}>
+                        <MaskedTextField
+                          name="tel"
+                          label="Номер телефону"
+                          type="tel"
+                          format="+38(###)###-##-##"
+                          // valueIsNumericString={true}
+                          mask="_"
+                          formatResult={true}
+                          fullWidth
+                          disabled={values?.checked}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <MaskedTextField
+                          name="inn"
+                          label="Податковий номер (РНОКПП)"
+                          format="##########"
+                          type="tel"
+                          mask="_"
+                          valueIsNumericString={true}
+                          fullWidth
+                          disabled={values?.checked}
+                        />
+                      </Grid>
+                    </Grid>
 
-                <CheckField
-                  name="agree"
-                  label="Даю згоду на обробку персональних даних"
-                  sx={{ mb: 2, textAlign: 'left' }}
-                />
+                    <Grid container columnSpacing={2} columns={12}>
+                      <Grid item xs={12} sm={7}>
+                        <MaskedTextField
+                          name="vpoNumber"
+                          label="Номер довідки ВПО"
+                          format="####-##########"
+                          // valueIsNumericString={true}
+                          formatResult={true}
+                          mask="_"
+                          type="tel"
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={5}>
+                        <MaskedTextField
+                          name="vpoDate"
+                          label="Дата видачі довідки"
+                          format="##.##.####"
+                          mask="_"
+                          type="tel"
+                          // valueIsNumericString={true}
+                          formatResult={true}
+                          fullWidth
+                        />
+                      </Grid>
+                    </Grid>
 
-                <Button
-                  startIcon={isSubmitting ? <CircularProgress size="1rem" /> : null}
-                  disabled={isSubmitting}
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  type="submit"
-                >
-                  {isSubmitting ? 'Завантаження' : 'Відправити'}
-                </Button>
+                    <CheckField
+                      name="agree"
+                      label="Даю згоду на обробку персональних даних"
+                      sx={{ mb: 2, textAlign: 'left' }}
+                    />
+
+                    <Button
+                      startIcon={isSubmitting ? <CircularProgress size="1rem" /> : null}
+                      disabled={isSubmitting}
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      type="submit"
+                    >
+                      {isSubmitting ? 'Завантаження' : 'Відправити'}
+                    </Button>
+                  </>
+                )}
+
+
 
               </Form>
             )}
