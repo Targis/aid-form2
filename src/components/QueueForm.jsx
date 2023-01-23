@@ -159,6 +159,7 @@ const QueueForm = () => {
 
           switch (data?.result) {
             case 'closed':
+            case 'refused':
               Swal.fire({
                 title: 'Відхилено',
                 text: `Форма закрита. Черга сформована або запис ще не розпочався.`,
@@ -202,10 +203,6 @@ const QueueForm = () => {
                 allowEnterKey: false,
                 confirmButtonText: 'Закрити'
               })
-              helpers?.resetForm()
-              break
-            case 'refused':
-              Swal.fire('Відхилено', 'Нажаль, черга вже сформована. Слідкуйте за оголошеннями.', 'error')
               helpers?.resetForm()
               break
             case 'timeout':
