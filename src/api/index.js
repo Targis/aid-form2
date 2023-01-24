@@ -4,10 +4,11 @@ const key =
 
 // HUB's queue key
 const hubKey =
-  'AKfycbzLdaTFaCPT10xNGs8djrERKXPSUW8Q3My-aIlyNharwx_TX9UVLZWbe8V1q1yA71nK'
+  'AKfycbzyPYPUxXZ3NU6AljPOR7rSi68f_pL8Fw0XstVtWOYRbNhZzReWBSNRJnI5DgYXFhTb'
 
 // hub's test key
-// const hubKey = 'AKfycbwOccF4BS_UTu0gsaNss7IZ508GauGObAfks8zCJIxhwb31PKFZO4eQUwXMBwZK818u'
+// const hubKey =
+//   'AKfycbyzUV6Jzs23ZINeebLJRXP3EYvCfL-oCQ8gaMHAX2Y0ybLaQGJvs3e8PgioZ0uQ6Gad'
 
 const getActionURI = (keyString) =>
   `https://script.google.com/macros/s/${keyString}/exec`
