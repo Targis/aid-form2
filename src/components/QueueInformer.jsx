@@ -1,15 +1,21 @@
-import { io } from 'socket.io-client'
+import { Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+<<<<<<< Updated upstream
 
 const socket = io('http://localhost:4000')
+=======
+import socketIO from 'socket.io-client';
+const socket = socketIO.connect('http://localhost:4000');
+>>>>>>> Stashed changes
 
 const QueueInformer = ({ url = 'http://localhost:4000' }) => {
 
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const [lastPong, setLastPong] = useState(null);
+  const [count, setCount] = useState('');
 
   useEffect(() => {
-    socket.on('connect', () => {
+
+    socket.on('connected', () => {
       setIsConnected(true);
     });
 
@@ -17,28 +23,26 @@ const QueueInformer = ({ url = 'http://localhost:4000' }) => {
       setIsConnected(false);
     });
 
-    socket.on('pong', () => {
-      setLastPong(new Date().toISOString());
+    socket.on('sendCount', (count) => {
+      setCount(count)
     });
 
     return () => {
-      socket.off('connect');
+      socket.off('connection');
       socket.off('disconnect');
-      socket.off('pong');
+      socket.off('sendCount');
     };
   }, []);
 
-  const sendPing = () => {
-    socket.emit('ping');
-  }
+
 
 
   return (
-    <div>
-      <p>Connected: {'' + isConnected}</p>
-      <p>Last pong: {lastPong || '-'}</p>
-      <button onClick={sendPing}>Send ping</button>
-    </div>
+    <Typography variant='body2' component='div' sx={{ display: 'inline-flex', alignItems: 'center' }}>
+      <span style={{ fontSize: '.5rem' }}>{isConnected ? '🟢' : '🔴'}</span>
+      {' '}
+      <span>{count ? `Online: ${count}` : ''}</span>
+    </Typography>
   )
 }
 
