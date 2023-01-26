@@ -8,6 +8,7 @@ import CheckField from 'components/inputs/CheckField'
 import SimpleSelect from 'components/inputs/SimpleSelect'
 // import QueueInformer from './QueueInformer'
 import { CircularProgress, Button } from '@mui/material'
+import LinearProgressWithLabel from './LinearProgressWithLabel'
 import { getFormData } from 'helpers/normalizeData'
 import { dayNames } from 'helpers/date'
 import getDay from 'date-fns/getDay'
@@ -109,18 +110,29 @@ const QueueForm = () => {
   const [service, setService] = useState(null)
   const [isLoading, setLoading] = useState(true)
   const [isClosed, setClosed] = useState(true)
+  const [availableCount, setAvailableCount] = useState(100)
 
   const isFormVisible = service && !isLoading && !isClosed
+
+  const getAvailableCount = (max, current) => {
+    max = +max
+    current = +current
+    if (isNaN(max) || isNaN(current)) {
+      return 0
+    }
+    return Math.ceil(100 - (current / max * 100))
+  }
 
   const isFormClosed = async (action) => {
     try {
       await fetch(action, { method: 'GET' })
         .then(res => res.json())
         .then(data => {
-          console.log(data)
+          // console.log(data)
           if (data?.status === 'open') {
-            console.log(data?.status)
+            // console.log(data)
             setClosed(false)
+            setAvailableCount(getAvailableCount(data?.max, data?.current))
           }
           return null
         })
@@ -160,6 +172,7 @@ const QueueForm = () => {
 
           switch (data?.result) {
             case 'closed':
+            case 'refused':
               Swal.fire({
                 title: 'Відхилено',
                 text: `Форма закрита. Черга сформована або запис ще не розпочався.`,
@@ -205,6 +218,7 @@ const QueueForm = () => {
               })
               helpers?.resetForm()
               break
+<<<<<<< HEAD
             case 'refused':
               Swal.fire({
                 title: 'Відхилено',
@@ -220,6 +234,8 @@ const QueueForm = () => {
                 }
               })
               break
+=======
+>>>>>>> main
             case 'timeout':
               Swal.fire('', 'Перевищено час очікування. Спробуйте ще.', 'warning')
               break
@@ -280,16 +296,19 @@ const QueueForm = () => {
 
       {isFormVisible && (
         <>
+
           <Typography color="inherit" variant="h6" component="div" sx={{ mb: 4 }}>
             {service?.title.split('\n').map((line, k) => (
               <div key={k}>{line} <br /></div>
             ))}
           </Typography>
+
           {/* <Typography color="inherit" variant="p" component="div" sx={{ mb: 4, textAlign: 'left' }}>
             {service?.description.split('\n').map((line, k) => (
               <div key={k}>{line} <br /></div>
             ))}
           </Typography> */}
+          <LinearProgressWithLabel variant="determinate" value={availableCount} />
           <Formik
             initialValues={initialValues}
             // validateOnChange={false}
