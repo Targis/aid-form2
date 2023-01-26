@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client'
 import React, { useState, useEffect } from 'react';
 
-// const socket = io('http://localhost:4000')
+const socket = io('http://localhost:4000')
 
 const QueueInformer = ({ url = 'http://localhost:4000' }) => {
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Typography, Grid } from '@mui/material'
 import { Formik, Form } from 'formik'
 import Swal from 'sweetalert2'
@@ -6,7 +6,7 @@ import TextInput from 'components/inputs/TextInput'
 import MaskedTextField from 'components/inputs/MaskedTextField'
 import CheckField from 'components/inputs/CheckField'
 import SimpleSelect from 'components/inputs/SimpleSelect'
-// import QueueInformer from './QueueInformer'
+import QueueInformer from './QueueInformer'
 import { CircularProgress, Button } from '@mui/material'
 import LinearProgressWithLabel from './LinearProgressWithLabel'
 import { getFormData } from 'helpers/normalizeData'
@@ -123,31 +123,33 @@ const QueueForm = () => {
     return Math.ceil(100 - (current / max * 100))
   }
 
-  const isFormClosed = async (action) => {
-    try {
-      await fetch(action, { method: 'GET' })
-        .then(res => res.json())
-        .then(data => {
-          // console.log(data)
-          if (data?.status === 'open') {
+  const isFormClosed = useCallback(
+    async (action) => {
+      try {
+        await fetch(action, { method: 'GET' })
+          .then(res => res.json())
+          .then(data => {
             // console.log(data)
-            setClosed(false)
-            setAvailableCount(getAvailableCount(data?.max, data?.current))
-          }
-          return null
-        })
-    } catch (e) {
-      throw new Error(e)
-    } finally {
-      setLoading(false)
-    }
-  }
+            if (data?.status === 'open') {
+              // console.log(data)
+              setClosed(false)
+              setAvailableCount(getAvailableCount(data?.max, data?.current))
+            }
+            return null
+          })
+      } catch (e) {
+        throw new Error(e)
+      } finally {
+        setLoading(false)
+      }
+    }, []
+  )
 
   useEffect(() => {
     if (service) {
       setClosed(isFormClosed(service?.action))
     }
-  }, [service])
+  }, [service, isFormClosed])
 
   const handleSubmit = async (values, helpers) => {
     const toNormalize = ['first_name', 'last_name', 'middle_name']
@@ -218,24 +220,6 @@ const QueueForm = () => {
               })
               helpers?.resetForm()
               break
-<<<<<<< HEAD
-            case 'refused':
-              Swal.fire({
-                title: 'Відхилено',
-                text: `Нажаль, черга вже сформована. Слідкуйте за оголошеннями.`,
-                icon: 'error',
-                confirmButtonText: 'Закрити',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  helpers?.resetForm()
-                  window.location.reload()
-                }
-              })
-              break
-=======
->>>>>>> main
             case 'timeout':
               Swal.fire('', 'Перевищено час очікування. Спробуйте ще.', 'warning')
               break
@@ -262,7 +246,7 @@ const QueueForm = () => {
   return (
     <div style={{ marginBottom: '2em' }}>
 
-      {/* <QueueInformer /> */}
+      <QueueInformer />
 
       {!service && (
         <>
