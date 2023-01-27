@@ -1,14 +1,12 @@
 import { Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-<<<<<<< Updated upstream
-
-const socket = io('http://localhost:4000')
-=======
 import socketIO from 'socket.io-client';
-const socket = socketIO.connect('http://localhost:4000');
->>>>>>> Stashed changes
 
-const QueueInformer = ({ url = 'http://localhost:4000' }) => {
+// const socket = socketIO.connect('http://localhost:5000');
+
+const socket = socketIO.connect('http://aid-informer.targis.pp.ua:5000');
+
+const QueueInformer = () => {
 
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [count, setCount] = useState('');
@@ -34,15 +32,15 @@ const QueueInformer = ({ url = 'http://localhost:4000' }) => {
     };
   }, []);
 
-
-
-
   return (
-    <Typography variant='body2' component='div' sx={{ display: 'inline-flex', alignItems: 'center' }}>
-      <span style={{ fontSize: '.5rem' }}>{isConnected ? '🟢' : '🔴'}</span>
-      {' '}
-      <span>{count ? `Online: ${count}` : ''}</span>
-    </Typography>
+    <>
+      {isConnected && count && (
+        <Typography variant='body2' color="text.secondary" sx={{ display: 'inline-flex', alignItems: 'center', my: 6 }}>
+          <span>{`Зараз цю сторінку переглядають: ${count}`}</span>
+        </Typography>
+      )}
+
+    </>
   )
 }
 

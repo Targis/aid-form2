@@ -246,8 +246,6 @@ const QueueForm = () => {
   return (
     <div style={{ marginBottom: '2em' }}>
 
-      <QueueInformer />
-
       {!service && (
         <>
           <Typography color="inherit" variant="h5" component="div" sx={{ mb: 4 }}>
@@ -271,12 +269,14 @@ const QueueForm = () => {
 
       {service && isLoading && (
         <>
-          <div> Завантаження...</div> <br />
-          <CircularProgress size="3rem" />
+          <div> Завантаження...</div>
+          <br />
+          <div><CircularProgress size="3rem" /></div>
         </>
       )}
 
       {isClosed && !isLoading && ('Форма закрита. Черга сформована або запис ще не розпочався.')}
+
 
       {isFormVisible && (
         <>
@@ -397,9 +397,10 @@ const QueueForm = () => {
             )}
 
           </Formik>
+
         </>
       )}
-
+      <QueueInformer />
     </div >
   )
 }
