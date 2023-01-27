@@ -4,7 +4,7 @@ import socketIO from 'socket.io-client';
 
 // const socket = socketIO.connect('http://localhost:5000');
 
-const socket = socketIO.connect('http://aid-informer.targis.pp.ua');
+const socket = socketIO.connect('https://aid-informer.targis.pp.ua');
 
 const QueueInformer = () => {
 
