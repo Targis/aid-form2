@@ -1,6 +1,6 @@
 // Aid registration key
 const key =
-  'AKfycbyZMMccNvJpqQMnR6vw4aE5_XyBe1RttzCAWby9wqasH_8AjBTmJpRaAqqafXu5yruB'
+  'AKfycbz2onZwIjr_l5F5nu1SiL8vuAVf7-KrKKTHUvj-0pBHzP5AUkOMmNbs20jdidJ1bPb9'
 
 // HUB's queue key
 const hubKey =

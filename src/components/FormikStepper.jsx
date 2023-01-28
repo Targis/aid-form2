@@ -118,6 +118,10 @@ function FormikStepper({ children, ...props }) {
               // <p>Номер в черзі <strong>${data.number}</strong></p>
             }
 
+            if (data.result === 'timeout') {
+              Swal.fire('', 'Перевищено час очікування. Спробуйте ще.', 'warning')
+            }
+
             if (data.result === 'error') {
               Swal.fire({
                 title: 'Упс...',
