@@ -7,8 +7,7 @@ const hubKey =
   'AKfycbzyPYPUxXZ3NU6AljPOR7rSi68f_pL8Fw0XstVtWOYRbNhZzReWBSNRJnI5DgYXFhTb'
 
 // hub's test key
-// const hubKey =
-//   'AKfycbyzUV6Jzs23ZINeebLJRXP3EYvCfL-oCQ8gaMHAX2Y0ybLaQGJvs3e8PgioZ0uQ6Gad'
+// const hubKey = 'AKfycbyzUV6Jzs23ZINeebLJRXP3EYvCfL-oCQ8gaMHAX2Y0ybLaQGJvs3e8PgioZ0uQ6Gad'
 
 const getActionURI = (keyString) =>
   `https://script.google.com/macros/s/${keyString}/exec`
