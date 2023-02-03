@@ -5,7 +5,8 @@ import Swal from 'sweetalert2'
 import TextInput from 'components/inputs/TextInput'
 import MaskedTextField from 'components/inputs/MaskedTextField'
 import CheckField from 'components/inputs/CheckField'
-import SimpleSelect from 'components/inputs/SimpleSelect'
+import SelectInput from 'components/inputs/SelectInput'
+import ToggleButtons from 'components/inputs/ToggleButtons'
 import QueueInformer from '../QueueInformer'
 import { CircularProgress, Button } from '@mui/material'
 import LinearProgressWithLabel from '../LinearProgressWithLabel'
@@ -19,21 +20,17 @@ import { clothesAction } from 'api'
 import * as yup from 'yup'
 import { parseDateString } from 'helpers/date'
 
-//TEST
-// import StormTest from './StormTest'
-
-// async function stall(stallTime = 3000) {
-//   await new Promise(resolve => setTimeout(resolve, stallTime));
-// }
 
 const initialValues = {
+  check_delivery: false,
   last_name: '',
   first_name: '',
   middle_name: '',
   inn: '',
   tel: '',
-  vpoNumber: '',
-  vpoDate: '',
+  vpo_number: '',
+  child_doc: '',
+  child_bday: '',
   agree: false,
   checked: false
 }
@@ -101,9 +98,10 @@ const validationSchema = yup.object({
 
 const ClothesForm = () => {
 
-  const [isLoading, setLoading] = useState(true)
-  const [isClosed, setClosed] = useState(true)
+  const [isLoading, setLoading] = useState(false) //true
+  const [isClosed, setClosed] = useState(false) // true
   const [availableCount, setAvailableCount] = useState(100)
+  const [availableSizes, setAvailableSizes] = useState([])
   const [datestamp, setDatestamp] = useState(null)
 
   const getAvailableCount = (max, current) => {
@@ -114,6 +112,17 @@ const ClothesForm = () => {
     }
     return Math.ceil(100 - (current / max * 100))
   }
+
+  // const getAvailableSizes = (array) => {
+
+  //   const sizes = []
+  //    array.map(item => {
+  //     const sizeItem = {}
+  //     const available = Math.ceil(100 - (item[1] / item[2] * 100))
+  //     sizes.push(sizeItem)
+  //   })
+  //   return sizes
+  // }
 
   const isFormClosed = useCallback(
     async (action) => {
@@ -127,6 +136,7 @@ const ClothesForm = () => {
               setClosed(false)
               setDatestamp(data?.datestamp)
               setAvailableCount(getAvailableCount(data?.max, data?.current))
+              setAvailableSizes(getAvailableSizes(data?.sizes))
             }
             return null
           })
@@ -275,6 +285,7 @@ const ClothesForm = () => {
                   </>
                 ) : (
                   <>
+                    <ToggleButtons name="check_delivery" />
                     <TextInput name="last_name" label="Прізвище" fullWidth />
                     <TextInput name="first_name" label="Ім'я" fullWidth />
                     <TextInput name="middle_name" label="По-батькові" fullWidth />
@@ -309,7 +320,7 @@ const ClothesForm = () => {
 
                     <Grid item xs={12} sm={7}>
                       <MaskedTextField
-                        name="vpoNumber"
+                        name="vpo_number"
                         label="Номер довідки ВПО"
                         format="####-##########"
                         // valueIsNumericString={true}
@@ -319,7 +330,26 @@ const ClothesForm = () => {
                         fullWidth
                       />
                     </Grid>
-                    <TextInput name="child_doc" label="Серія і номер свідоцтва про народження" helperText="Зразок: ІЖС123456" fullWidth />
+                    <TextInput name="child_doc" label="Серія і номер свідоцтва про народження" helperText="Лише великі букви і цифри. Без пробілів і дефісів. Зразок: ІЖС123456" fullWidth />
+
+                    <MaskedTextField
+                      name="vpoDate"
+                      label="Дата видачі довідки"
+                      format="##.##.####"
+                      mask="_"
+                      type="tel"
+                      // valueIsNumericString={true}
+                      formatResult={true}
+                      fullWidth
+                    />
+
+                    <SelectInput
+                      name="size"
+                      label="Оберіть розмір одягу"
+                      options={availableSizes}
+                      defaultValue=""
+                      fullWidth
+                    />
 
                     <CheckField
                       name="agree"

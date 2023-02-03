@@ -14,7 +14,7 @@ const hubKey =
 //   'AKfycby4HqOSJ0ltYInfWXzmxbeqFcDVuW2tY30GOb4zUkdbM_67nCkGbFxB004g2ydvJZKl'
 
 const clothesKey =
-  'AKfycbxuGw1-vB3o8eKiMMRJGoHVqoKBC-tp4-Jud9oB2SeqxEOSMnxkcNnLPFGwpH-z4c00Iw'
+  'AKfycbzOs_VxRXU1dh9C5fF-RDeTFODGBUw1VSzWyyUu9u3O189PdVnwqW0hPxD1v2Uwel3Oiw'
 
 export const action = getActionURI(key)
 export const hubAction = getActionURI(hubKey)
