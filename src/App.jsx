@@ -2,6 +2,7 @@ import Header from 'components/Header'
 import RegisterForm from 'components/RegisterForm'
 import ReminderForm from 'components/ReminderForm'
 import QueueForm from 'components/QueueForm'
+import ClothesForm from 'components/forms/ClothesForm'
 import Container from '@mui/material/Container'
 import Home from 'components/Home'
 import {
@@ -38,6 +39,7 @@ function App() {
               <Route path="/orikhiv-aid/register" element={<RegisterForm />} />
               <Route path="/orikhiv-aid/reminder" element={<ReminderForm />} />
               <Route path="/orikhiv-aid/queue" element={<QueueForm />} />
+              <Route path="/orikhiv-aid/clothes" element={<ClothesForm />} />
 
               <Route path="*" element={
                 <div>Помилка 404. Сторінку не знайдено. <br />
