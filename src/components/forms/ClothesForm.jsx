@@ -46,6 +46,9 @@ const minDate = addDays(today, -18)
 const oneDayBeforeMinDate = addDays(minDate, -1)
 
 const validationSchema = yup.object({
+  check_delivery: yup
+    .boolean()
+    .oneOf([true], 'Отримання доступне тільки в місті Запоріжжя'),
   last_name: yup
     .string()
     .required("Це поле обов'язкове")
@@ -76,23 +79,23 @@ const validationSchema = yup.object({
     .string()
     .required("Це поле обов'язкове")
     .matches(/^\d{4}[-]\d{10}$/, 'Невірний формат (1234-1234567890)'),
-  child_bd: yup
+  child_doc: yup
+    .string()
+    .required("Це поле обов'язкове")
+    .matches(/^[A-ZА-ЩЬЮЯҐЄІЇ]{2,}\d{6}$/, 'Невірний формат'),
+  child_bday: yup
     .date()
     .required("Це поле обов'язкове")
     .transform(parseDateString)
     .typeError('Будь ласка, введіть дату в такому форматі ДД.ММ.РРРР')
     .min(oneDayBeforeMinDate, `Мінімальна дата ${format(minDate, 'dd.MM.yyyy')}`)
-    .max(today, 'Дата з майбутнього? 🤔'),
-  child_doc: yup
-    .string()
-    .required("Це поле обов'язкове")
-    .matches(/^[A-ZА-ЩЬЮЯҐЄІЇ]{2,}\d{6}$/, 'Невірний формат'),
-  agree: yup
-    .boolean()
-    .oneOf([true], 'Щоб продовжити, необхідно надати згоду'),
-  sizes: yup
+    .max(today, 'Ця дата ще не наступила'),
+  size: yup
     .string()
     .required("Це поле обов'язкове"),
+  agree: yup
+    .boolean()
+    .oneOf([true], 'Щоб продовжити, необхідно надати згоду')
 })
 
 
@@ -142,7 +145,7 @@ const ClothesForm = () => {
 
   const handleSubmit = async (values, helpers) => {
     const toNormalize = ['first_name', 'last_name', 'middle_name']
-    const toExclude = ['agree', 'checked']
+    const toExclude = ['agree', 'check_delivery']
 
     const data = getFormData(
       values,
@@ -316,7 +319,7 @@ const ClothesForm = () => {
                         fullWidth
                       />
                     </Grid>
-                    <TextInput name="middle_name" label="Серія і номер свідоцтва про народження" helperText="Зразок: ІЖС123456" fullWidth />
+                    <TextInput name="child_doc" label="Серія і номер свідоцтва про народження" helperText="Зразок: ІЖС123456" fullWidth />
 
                     <CheckField
                       name="agree"
