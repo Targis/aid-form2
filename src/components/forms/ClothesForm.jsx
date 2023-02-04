@@ -15,6 +15,7 @@ import { dayNames } from 'helpers/date'
 import getDay from 'date-fns/getDay'
 import parse from 'date-fns/parse'
 import addDays from 'date-fns/addDays'
+import addYears from 'date-fns/addYears'
 import format from 'date-fns/format'
 import { clothesAction } from 'api'
 import * as yup from 'yup'
@@ -31,6 +32,7 @@ const initialValues = {
   vpo_number: '',
   child_doc: '',
   child_bday: '',
+  size: '',
   agree: false,
   checked: false
 }
@@ -39,7 +41,7 @@ const phoneNumberRegex =
   /\(?([0-9]{3})\)?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/
 
 const today = new Date()
-const minDate = addDays(today, -18)
+const minDate = addYears(today, -18)
 const oneDayBeforeMinDate = addDays(minDate, -1)
 
 const validationSchema = yup.object({
@@ -98,11 +100,12 @@ const validationSchema = yup.object({
 
 const ClothesForm = () => {
 
-  const [isLoading, setLoading] = useState(false) //true
-  const [isClosed, setClosed] = useState(false) // true
+  const [isLoading, setLoading] = useState(true) //true
+  const [isClosed, setClosed] = useState(true) // true
   const [availableCount, setAvailableCount] = useState(100)
   const [availableSizes, setAvailableSizes] = useState([])
   const [datestamp, setDatestamp] = useState(null)
+  const [isConfirm, setConfirm] = useState(false)
 
   const getAvailableCount = (max, current) => {
     max = +max
@@ -113,16 +116,17 @@ const ClothesForm = () => {
     return Math.ceil(100 - (current / max * 100))
   }
 
-  // const getAvailableSizes = (array) => {
-
-  //   const sizes = []
-  //    array.map(item => {
-  //     const sizeItem = {}
-  //     const available = Math.ceil(100 - (item[1] / item[2] * 100))
-  //     sizes.push(sizeItem)
-  //   })
-  //   return sizes
-  // }
+  const getAvailableSizes = (array) => {
+    const sizes = array.map(item => {
+      const available = Math.ceil(100 - (item[2] / item[3] * 100))
+      return {
+        id: item[0],
+        label: item[1],
+        available
+      }
+    })
+    return sizes
+  }
 
   const isFormClosed = useCallback(
     async (action) => {
@@ -148,8 +152,39 @@ const ClothesForm = () => {
     }, []
   )
 
+  const handleConfirm = async (resetForm) => {
+    Swal.fire({
+      title: 'Важливо',
+      text: "Ви проживаєте",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Так, очистити форму',
+      cancelButtonText: 'Ні'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Форму очищено',
+          toast: true,
+          position: 'bottom-start',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        })
+      }
+    })
+  }
+
   useEffect(() => {
+
+    // getUserAgreement()
     setClosed(isFormClosed(clothesAction))
+    // if (isConfirmAgreement) {
+    //   setClosed(isFormClosed(clothesAction))
+    // }
+
   }, [])
 
 
@@ -285,7 +320,7 @@ const ClothesForm = () => {
                   </>
                 ) : (
                   <>
-                    <ToggleButtons name="check_delivery" />
+                    <ToggleButtons name="check_delivery" label={'Ви проживаєте в Запоріжжі і зможете особисто отримати одяг?'} />
                     <TextInput name="last_name" label="Прізвище" fullWidth />
                     <TextInput name="first_name" label="Ім'я" fullWidth />
                     <TextInput name="middle_name" label="По-батькові" fullWidth />
@@ -330,11 +365,16 @@ const ClothesForm = () => {
                         fullWidth
                       />
                     </Grid>
-                    <TextInput name="child_doc" label="Серія і номер свідоцтва про народження" helperText="Лише великі букви і цифри. Без пробілів і дефісів. Зразок: ІЖС123456" fullWidth />
+                    <TextInput
+                      name="child_doc"
+                      label="Серія і номер свідоцтва про народження"
+                      helperText="Лише великі букви і цифри. Без пробілів і дефісів. Зразок: ІЖС123456"
+                      fullWidth
+                    />
 
                     <MaskedTextField
-                      name="vpoDate"
-                      label="Дата видачі довідки"
+                      name="child_bday"
+                      label="Дата народження"
                       format="##.##.####"
                       mask="_"
                       type="tel"
@@ -346,7 +386,7 @@ const ClothesForm = () => {
                     <SelectInput
                       name="size"
                       label="Оберіть розмір одягу"
-                      options={availableSizes}
+                      options={availableSizes.map(size => `${size.label} (залишок ${size.available}%)`)}
                       defaultValue=""
                       fullWidth
                     />
