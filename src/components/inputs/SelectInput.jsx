@@ -26,8 +26,8 @@ export default function SelectInput({ ...props }) {
         value={meta.value}
       >
         {options.map((option, i) => (
-          <MenuItem key={i} value={option}>
-            {option}
+          <MenuItem key={i} value={option?.id ? option?.id : option}>
+            {option?.label ? option?.label : option}
           </MenuItem>
         ))}
       </Select>

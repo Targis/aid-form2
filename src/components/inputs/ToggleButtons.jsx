@@ -15,14 +15,14 @@ const options = [
   }
 ]
 
-export default function ToggleButtons({ name, label, helperText, ...props }) {
+export default function ToggleButtons({ name, label, helperText, changeFormState, ...props }) {
   const [field, meta, helpers] = useField(name)
 
-  const handleToggle = (event, newAlignment) => {
-    if (newAlignment !== null) {
-      console.log(newAlignment)
+  const handleToggle = (event, newValue) => {
+    if (newValue !== null) {
+      console.log(newValue)
       helpers.setTouched(true)
-      helpers.setValue(newAlignment)
+      helpers.setValue(newValue)
     }
 
   };
@@ -30,26 +30,26 @@ export default function ToggleButtons({ name, label, helperText, ...props }) {
   return (
     // <FormControl error={meta.touched && Boolean(meta.error)} sx={{ mb: 2 }} fullWidth>
 
-    <Grid sx={{ textAlign: 'left', my: 4 }}>
-      <Grid sx={{ display: 'flex' }}>
-        <Typography sx={{ flex: '1 1 auto' }}>Ви проживаєте в Запоріжжі і можете особисто отримати одяг?</Typography>
+    <Grid sx={{ my: 2 }}>
+      <Grid sx={{}}>
+        <Typography sx={{ flex: '1 1 auto' }}>{label}</Typography>
         <ToggleButtonGroup
-          color={meta.value ? 'primary' : 'error'}
+          color={meta.value ? 'success' : 'error'}
           value={meta.value}
           exclusive
           onChange={handleToggle}
           aria-label="text alignment"
-          sx={{ flex: '1 1 auto' }}
+          sx={{ flex: '1 1 auto', my: 2 }}
         >
-          <ToggleButton value={true} aria-label="left aligned" sx={{ minWidth: 13 }} >
+          <ToggleButton value={true} aria-label="left aligned" sx={{ minWidth: '100px' }} >
             Так
           </ToggleButton>
-          <ToggleButton value={false} aria-label="right aligned" sx={{ minWidth: 13 }} >
+          <ToggleButton value={false} aria-label="right aligned" sx={{ minWidth: '100px' }} >
             Ні
           </ToggleButton>
         </ToggleButtonGroup>
       </Grid>
-      <FormHelperText error={true} >{(meta.touched && meta.error) || ' '}</FormHelperText>
+      <FormHelperText sx={{ textAlign: 'center' }} error={true} >{(meta.touched && meta.error) || ' '}</FormHelperText>
     </Grid>
     // </FormControl>
   );
