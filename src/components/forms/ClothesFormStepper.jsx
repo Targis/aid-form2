@@ -53,17 +53,9 @@ function FormikStepper({ children, ...props }) {
                 allowOutsideClick: false,
               }).then((result) => {
                 if (result.isDismissed) {
-                  helpers.resetForm()
+                  helpers?.resetForm()
                   setStep(0)
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Форму очищено',
-                    toast: true,
-                    position: 'bottom-start',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                  })
+                  window.location.reload()
                 } else if (result.isConfirmed) {
                   helpers.setValues({
                     ...values,
