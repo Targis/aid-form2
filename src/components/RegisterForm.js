@@ -1,12 +1,12 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import { Typography} from '@mui/material'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Typography } from '@mui/material'
 import FormikStepper from './FormikStepper'
-import {StepCheck ,checkSchema} from './steps/StepCheck'
-import {StepPersonal, personalSchema} from './steps/StepPersonal'
-import {StepAddress, addressSchema} from 'components/steps/StepAddress'
-import {StepVPO, vpoSchema} from './steps/StepVPO'
-import {StepConfirm, confirmSchema} from './steps/StepConfirm'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { StepCheck, checkSchema } from './steps/StepCheck'
+import { StepPersonal, personalSchema } from './steps/StepPersonal'
+import { StepAddress, addressSchema } from 'components/steps/StepAddress'
+import { StepVPO, vpoSchema } from './steps/StepVPO'
+import { StepConfirm, confirmSchema } from './steps/StepConfirm'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import Swal from 'sweetalert2'
 
 // async function stall(stallTime = 3000) {
@@ -32,32 +32,28 @@ const initialValues = {
   vpoDate: '',
   phoneNumber: '',
   agree: false,
-  checked: false
+  checked: false,
 }
 
 const RegisterForm = () => {
-
   // const { executeRecaptcha } = useGoogleReCaptcha();
-  
+
   const informUser = useCallback(async () => {
     const skip = localStorage.getItem('skip')
-    if(skip) {
+    if (skip) {
       return
-    } 
+    }
     await Swal.fire({
       titleText: 'Зверніть увагу',
       text: 'З одного номеру телефону та податковим номером можна подати лише одну заявку.',
       input: 'checkbox',
       inputValue: 0,
-      inputPlaceholder:
-        'Більше не показувати це',
-      confirmButtonText:
-        'Продовжити',
-        allowOutsideClick: false
-    }).then(({value: accept, isConfirmed}) => {
+      inputPlaceholder: 'Більше не показувати це',
+      confirmButtonText: 'Продовжити',
+      allowOutsideClick: false,
+    }).then(({ value: accept, isConfirmed }) => {
       if (accept) localStorage.setItem('skip', true)
     })
-
   })
 
   // const handleReCaptchaVerify = useCallback(async () => {
@@ -74,11 +70,10 @@ const RegisterForm = () => {
 
   useEffect(() => {
     informUser()
-  }, [informUser]);
+  }, [informUser])
 
   return (
     <div style={{ marginBottom: '2em' }}>
-
       <Typography color="inherit" variant="h6" component="div" sx={{ mb: 4 }}>
         Форма реєстрації
       </Typography>
@@ -91,13 +86,16 @@ const RegisterForm = () => {
           console.log(values)
         }}
       >
-          <StepCheck label="Перевірка" validationSchema={checkSchema} isDisabled={(values) => values.checked} />
-          <StepPersonal label="П.І.Б." validationSchema={personalSchema} />
-          <StepAddress label="Адреса" validationSchema={addressSchema} />
-          <StepVPO label="ВПО" validationSchema={vpoSchema} />
-          <StepConfirm label="Підтвердіть" validationSchema={confirmSchema} />
+        <StepCheck
+          label="Перевірка"
+          validationSchema={checkSchema}
+          isDisabled={(values) => values.checked}
+        />
+        <StepPersonal label="П.І.Б." validationSchema={personalSchema} />
+        <StepAddress label="Адреса" validationSchema={addressSchema} />
+        <StepVPO label="ВПО" validationSchema={vpoSchema} />
+        <StepConfirm label="Підтвердіть" validationSchema={confirmSchema} />
       </FormikStepper>
-      
     </div>
   )
 }
