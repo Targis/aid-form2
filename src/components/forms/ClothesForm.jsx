@@ -93,7 +93,7 @@ const ClothesForm = () => {
 
 
   return (
-    <FormContext.Provider value={availableSizes}>
+    <FormContext.Provider value={{ availableSizes, isFormClosed }}>
       <div style={{ marginBottom: '2em' }}>
 
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Formik, Form } from 'formik'
 import {
   Button,
@@ -9,8 +9,11 @@ import Swal from 'sweetalert2'
 
 import { clothesAction } from 'api'
 import { getFormData } from 'helpers/normalizeData'
+import { FormContext } from 'components/forms/ClothesForm'
 
 function FormikStepper({ children, ...props }) {
+  const { isFormClosed } = useContext(FormContext);
+
   const childrenArray = React.Children.toArray(children)
   const [step, setStep] = React.useState(0)
 
@@ -90,6 +93,8 @@ function FormikStepper({ children, ...props }) {
             }
             if (data.result === 'unavailable') {
               Swal.fire('Відмова', 'Цей розмір вже недоступний, спробуйте інший', 'error')
+              isFormClosed(clothesAction)
+
             }
             if (data.result === 'timeout') {
               Swal.fire('', 'Перевищено час очікування. Спробуйте ще.', 'warning')

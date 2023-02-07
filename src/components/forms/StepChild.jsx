@@ -38,7 +38,7 @@ const childSchema = yup.object({
 })
 
 const StepChild = () => {
-  const availableSizes = useContext(FormContext);
+  const { availableSizes } = useContext(FormContext);
 
   return (
     <FormikStep>
