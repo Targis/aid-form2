@@ -12,11 +12,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Logo from 'components/layout/Logo';
 
 import { NavLink } from "react-router-dom";
 
-import LogoXS from 'img/logo50.png'
-import UkraineIcon from 'components/icons/UkraineIcon'
 
 const drawerWidth = 240;
 const navItems = [
@@ -63,40 +62,10 @@ function DrawerAppBar(props) {
       <AppBar component="nav" sx={{
         background: '#2E3B55',
         position: 'sticky',
-        mb: 5,
+        // mb: 5,
       }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'left' }}>
-            <img
-              src={LogoXS}
-              alt="logo"
-              loading="lazy"
-              width="40px"
-              height="40px"
-            />
-            <Typography
-              color="inherit"
-              variant="title"
-              sx={{ position: 'relative', ml: 0.5, mr: 2.5, color: '#fff', textDecoration: 'none' }}
-              component={NavLink}
-              to="orikhiv-aid"
-            >
-              Оріхівська громада
-              <UkraineIcon
-                sx={{
-                  position: 'absolute',
-                  top: '-50%',
-                  width: '12px',
-                  left: '100%',
-                  marginLeft: '3px',
-                  // display: {
-                  //   xs: 'none', sm: 'block'
-                  // }
-                }}
-              />
-            </Typography>
-
-          </Box>
+          <Logo />
           <IconButton
             color="inherit"
             aria-label="open drawer"
