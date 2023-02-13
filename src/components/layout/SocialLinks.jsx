@@ -2,8 +2,6 @@ import Stack from "@mui/material/Stack"
 import TelegramIcon from '@mui/icons-material/Telegram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import ViberIcon from 'components/layout/ViberIcon';
-import { styled } from '@mui/material/styles';
-import { NavLink } from "react-router-dom";
 
 
 const socialItems = [
