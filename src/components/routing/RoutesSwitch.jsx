@@ -1,5 +1,4 @@
 import {
-  BrowserRouter,
   Routes,
   Route,
   Navigate,
@@ -8,7 +7,7 @@ import {
 import RegisterForm from 'components/RegisterForm'
 import ReminderForm from 'components/ReminderForm'
 import QueueForm from 'components/QueueForm'
-import ClothesForm from 'components/forms/ClothesForm'
+import ClothesForm from 'components/forms/ClothesForm/ClothesForm'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Container'
 import Home from 'components/Home'
@@ -16,10 +15,11 @@ import {
   GoogleReCaptchaProvider,
 } from 'react-google-recaptcha-v3';
 
+
 const RoutesSwitch = () => {
   return (
-    <Container py={4} spacing="2" maxWidth="lg" direction="column" sx={{ minHeight: 'calc(100vh - 64px - 87px)' }}>
-      <Box sx={{ paddingTop: 4, paddingBottom: 4 }}>
+    <Container py={4} spacing="2" maxWidth="lg" direction="column" sx={{ minHeight: 'calc(100vh - 64px - 87px - 4 * 2 * 8px)' }}>
+      <Box >
         <GoogleReCaptchaProvider
           reCaptchaKey={process.env.REACT_APP_SITE_KEY}
           container={{
