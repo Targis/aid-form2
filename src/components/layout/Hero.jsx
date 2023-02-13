@@ -4,42 +4,35 @@ import Button from '@mui/material/Button';
 import { NavLink } from "react-router-dom";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import heroImage from 'img/hero-image.svg'
 
 const Hero = () => {
   return (
-    <Grid container>
-      <Grid item>
-        <Typography component="h1" variant="h4" sx={{ mb: 4 }}>Гуманітарна допомога <br /> внутрішньо переміщеним особам (ВПО) <br /> з Оріхівської громади</Typography>
+    <Grid container sx={{
+      py: 5,
+      minHeight: "calc(100vh - 64px)",
+      display: "flex",
+      alignItems: "center"
+    }}>
+      <Grid item md={6}>
+        <Typography component="h1" variant="h4" sx={{ mb: 4 }}>Гуманітарна допомога <br /> внутрішньо переміщеним особам<br /> з Оріхівської громади</Typography>
 
         <Button
           variant="contained"
           size="large"
           component={NavLink}
           to="register"
-          startIcon={<HowToRegIcon />}
           sx={{
-            m: 2,
-            width: '100%',
-            maxWidth: '210px'
+            mb: 8,
+            // width: '100%',
+            // maxWidth: '210px'
           }}>
-          Реєстрація
+          Обрати категорію
         </Button>
-        <Button
-          variant="outlined"
-          size="large"
-          component={NavLink}
-          to="reminder"
-          endIcon={<PersonSearchIcon />}
-          sx={{
-            m: 2,
-            width: '100%',
-            maxWidth: '210px'
-          }}>
-          Нагадати номер
-        </Button>
+
       </Grid>
-      <Grid item>
-        <img src="img/" alt="" />
+      <Grid item md={6} sx={{ px: 2, mb: 15 }}>
+        <img src={heroImage} alt="Volonteers" style={{ width: "100%", height: "auto", filter: "grayscale(.3) contrast(0.75)" }} />
       </Grid>
 
     </Grid>
