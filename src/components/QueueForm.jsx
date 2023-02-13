@@ -6,6 +6,7 @@ import TextInput from 'components/inputs/TextInput'
 import MaskedTextField from 'components/inputs/MaskedTextField'
 import CheckField from 'components/inputs/CheckField'
 import SimpleSelect from 'components/inputs/SimpleSelect'
+import SelectInput from 'components/inputs/SelectInput'
 import QueueInformer from './QueueInformer'
 import { CircularProgress, Button } from '@mui/material'
 import LinearProgressWithLabel from './LinearProgressWithLabel'
@@ -18,6 +19,7 @@ import format from 'date-fns/format'
 import { hubAction } from 'api'
 import * as yup from 'yup'
 import { parseDateString } from 'helpers/date'
+import { cities } from 'helpers/toponyms'
 
 //TEST
 // import StormTest from './StormTest'
@@ -34,6 +36,7 @@ const initialValues = {
   tel: '',
   vpoNumber: '',
   vpoDate: '',
+  city: '',
   agree: false,
   checked: false
 }
@@ -83,6 +86,9 @@ const validationSchema = yup.object({
     .typeError('Будь ласка, введіть дату в такому форматі ДД.ММ.РРРР')
     .min(oneDayBeforeMinDate, `Мінімальна дата ${format(minDate, 'dd.MM.yyyy')}`)
     .max(today, 'Дата з майбутнього? 🤔'),
+  city: yup
+    .string()
+    .required("Це поле обов'язкове"),
   agree: yup
     .boolean()
     .oneOf([true], 'Щоб продовжити, необхідно надати згоду'),
@@ -195,6 +201,7 @@ const QueueForm = () => {
               // const dateString = format(parseISO(data?.date), 'dd.MM.yyyy')
               // const time = format(parseISO(data?.time), 'hh:mm')
               Swal.fire({
+                title: 'Ви записались в чергу',
                 html:
                   `<div style='text-align: left'>
                   <table style='margin: 0 auto; border: 2px solid #a5dc86; padding: 0.5em; border-spacing: 10px;'>
@@ -208,7 +215,7 @@ const QueueForm = () => {
                   <br><br>
                   <b> Адреса реєстрації:</b> м. Запоріжжя, вул. Лермонтова, 9 (в будівлі БК "Орбіта" з протилежної сторони від головного входу). НЕ в Просторі Єдності!<br><br>
                   Номер в черзі дійсний тільки в цей день. <br><br>
-                  * - через повітряні тривоги, перебої з електрикою та інші обставини час може бути змінено адміністратором.
+                  * - час орієнтовний, але не запізнюйтесь
                   </div>
                   `,
                 icon: 'success',
@@ -371,6 +378,12 @@ const QueueForm = () => {
                         />
                       </Grid>
                     </Grid>
+
+                    <SelectInput
+                      name="city"
+                      label="Звідки виїхали"
+                      options={cities}
+                    />
 
                     <CheckField
                       name="agree"
