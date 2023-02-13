@@ -3,12 +3,12 @@ import { Typography } from '@mui/material'
 import { Formik, Form } from 'formik'
 import ToggleButtons from 'components/inputs/ToggleButtons'
 import { CircularProgress, Button } from '@mui/material'
-import LinearProgressWithLabel from '../LinearProgressWithLabel'
+import LinearProgressWithLabel from '../../LinearProgressWithLabel'
 import { clothesAction } from 'api'
 import * as yup from 'yup'
-import ClothesFormStepper from 'components/forms/ClothesFormStepper'
-import { StepParent, parentSchema } from 'components/forms/StepParent'
-import { StepChild, childSchema } from 'components/forms/StepChild'
+import ClothesFormStepper from 'components/forms/ClothesForm/ClothesFormStepper'
+import { StepParent, parentSchema } from 'components/forms/ClothesForm/StepParent'
+import { StepChild, childSchema } from 'components/forms/ClothesForm/StepChild'
 
 
 const initialValues = {

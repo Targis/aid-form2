@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 
 import { clothesAction } from 'api'
 import { getFormData } from 'helpers/normalizeData'
-import { FormContext } from 'components/forms/ClothesForm'
+import { FormContext } from 'components/forms/ClothesForm/ClothesForm'
 
 function FormikStepper({ children, ...props }) {
   const { isFormClosed } = useContext(FormContext);
