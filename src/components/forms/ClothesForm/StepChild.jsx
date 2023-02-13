@@ -4,7 +4,7 @@ import TextInput from 'components/inputs/TextInput'
 import MaskedTextField from 'components/inputs/MaskedTextField'
 import SelectInput from 'components/inputs/SelectInput'
 import CheckField from 'components/inputs/CheckField'
-import { FormContext } from 'components/forms/ClothesForm'
+import { FormContext } from 'components/forms/ClothesForm/ClothesForm'
 
 import * as yup from 'yup'
 import { parseDateString } from 'helpers/date'

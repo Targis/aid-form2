@@ -2,7 +2,7 @@ import Header from 'components/Header'
 import RegisterForm from 'components/RegisterForm'
 import ReminderForm from 'components/ReminderForm'
 import QueueForm from 'components/QueueForm'
-import ClothesForm from 'components/forms/ClothesForm'
+import ClothesForm from 'components/forms/ClothesForm/ClothesForm'
 import Container from '@mui/material/Container'
 import Home from 'components/Home'
 import {
