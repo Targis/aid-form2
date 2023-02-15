@@ -12,8 +12,8 @@ const Logo = ({ color }) => {
         src={LogoXS}
         alt="logo"
         loading="lazy"
-        width="40px"
-        height="40px"
+        width="32px"
+        height="auto"
       />
       <Typography
         color={color || "#fff"}
