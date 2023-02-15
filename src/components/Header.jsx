@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import Logo from 'components/layout/Logo';
 
 import { NavLink } from "react-router-dom";
@@ -64,31 +65,34 @@ function DrawerAppBar(props) {
         position: 'sticky',
         // mb: 5,
       }}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Logo />
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Logo />
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { md: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
 
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            {navItems.map((item) => (
-              <Button
-                key={item?.label}
-                sx={{ color: '#fff' }}
-                component={NavLink} to={item?.href}
-              >
-                {item?.label}
-              </Button>
-            ))}
-          </Box>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              {navItems.map((item) => (
+                <Button
+                  key={item?.label}
+                  sx={{ color: '#fff' }}
+                  component={NavLink} to={item?.href}
+                >
+                  {item?.label}
+                </Button>
+              ))}
+            </Box>
 
-        </Toolbar>
+          </Toolbar>
+        </Container>
+
       </AppBar>
       <Box component="nav">
         <Drawer
