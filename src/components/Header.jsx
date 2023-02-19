@@ -65,7 +65,7 @@ function DrawerAppBar(props) {
         position: 'sticky',
         // mb: 5,
       }}>
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Logo />
             <IconButton
