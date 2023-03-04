@@ -1,13 +1,14 @@
-import React from "react"
+import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import SectionTitle from "components/layout/SectionTitle"
 
-const Section = ({ children, title }) => {
-  // console.log(children)
+const Section = ({ children, title, bg, maxWidth = 'lg' }) => {
   return (
-    <Box sx={{ py: 5 }}>
-      <SectionTitle title={title} />
-      {children}
+    <Box sx={{ background: bg ? bg : '#fff' }}>
+      <Container maxWidth={maxWidth} sx={{ py: 5 }}>
+        {title && (<SectionTitle title={title} />)}
+        {children}
+      </Container>
     </Box>
   )
 }

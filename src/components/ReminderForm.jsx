@@ -5,6 +5,7 @@ import {
   Typography
 } from '@mui/material'
 import { StepCheck, checkSchema } from 'components/steps/StepCheck'
+import Section from './layout/Section'
 import Swal from 'sweetalert2'
 
 import { action } from 'api'
@@ -93,12 +94,9 @@ const ReminderForm = () => {
   }
 
   return (
-    <div style={{ marginBottom: '2em' }}>
+    <Section maxWidth={'sm'} title={'Пошук в базі'}>
 
-      <Typography color="inherit" variant="h6" component="div" sx={{ mb: 1 }}>
-        Пошук в базі
-      </Typography>
-      <Typography color="inherit" variant="caption" component="div" sx={{ mb: 3 }}>
+      <Typography color="inherit" variant="caption" component="div" sx={{ textAlign: 'center', mb: 3 }}>
         Ця форма допоможе знайти ваш номер в базі громади, якщо ви реєструвались.
       </Typography>
 
@@ -148,7 +146,7 @@ const ReminderForm = () => {
         )}
       </Formik>
 
-    </div>
+    </Section>
   )
 }
 

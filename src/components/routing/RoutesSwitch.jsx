@@ -17,7 +17,7 @@ import {
 
 const RoutesSwitch = () => {
   return (
-    <Box pt={4} spacing="2" maxWidth="xl" direction="column" sx={{ minHeight: 'calc(100vh - 64px - 87px - 4 * 2 * 8px)' }}>
+    <Box pt={4} spacing="2" direction="column" sx={{ minHeight: 'calc(100vh - 64px - 87px - 4 * 2 * 8px)' }}>
       <GoogleReCaptchaProvider
         reCaptchaKey={process.env.REACT_APP_SITE_KEY}
         container={{

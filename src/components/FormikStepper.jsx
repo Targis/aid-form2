@@ -169,7 +169,7 @@ function FormikStepper({ children, ...props }) {
     })
   }
 
-  const adaptiveStepper = isMobile ? (<Typography sx={{ mb: 3 }}>Крок {step + 1} / {childrenArray.length}. {currentChild?.props?.label}</Typography>) : (
+  const adaptiveStepper = isMobile ? (<Typography sx={{ textAlign: 'center', mb: 3 }}>Крок {step + 1} / {childrenArray.length}. {currentChild?.props?.label}</Typography>) : (
     <Stepper
       alternativeLabel
       activeStep={step}

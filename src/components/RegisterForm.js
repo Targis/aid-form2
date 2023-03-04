@@ -6,7 +6,7 @@ import { StepPersonal, personalSchema } from './steps/StepPersonal'
 import { StepAddress, addressSchema } from 'components/steps/StepAddress'
 import { StepVPO, vpoSchema } from './steps/StepVPO'
 import { StepConfirm, confirmSchema } from './steps/StepConfirm'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import Section from './layout/Section'
 import Swal from 'sweetalert2'
 
 // async function stall(stallTime = 3000) {
@@ -73,11 +73,7 @@ const RegisterForm = () => {
   }, [informUser])
 
   return (
-    <div style={{ marginBottom: '2em' }}>
-      <Typography color="inherit" variant="h6" component="div" sx={{ mb: 4 }}>
-        Форма реєстрації
-      </Typography>
-
+    <Section title={'Форма реєстрації'} maxWidth={'sm'}>
       <FormikStepper
         initialValues={initialValues}
         // validateOnChange={false}
@@ -96,7 +92,7 @@ const RegisterForm = () => {
         <StepVPO label="ВПО" validationSchema={vpoSchema} />
         <StepConfirm label="Підтвердіть" validationSchema={confirmSchema} />
       </FormikStepper>
-    </div>
+    </Section>
   )
 }
 

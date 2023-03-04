@@ -7,6 +7,7 @@ import MaskedTextField from 'components/inputs/MaskedTextField'
 import CheckField from 'components/inputs/CheckField'
 import SimpleSelect from 'components/inputs/SimpleSelect'
 import QueueInformer from './QueueInformer'
+import Section from './layout/Section'
 import { CircularProgress, Button } from '@mui/material'
 import LinearProgressWithLabel from './LinearProgressWithLabel'
 import { getFormData } from 'helpers/normalizeData'
@@ -244,10 +245,10 @@ const QueueForm = () => {
   }
 
   return (
-    <div style={{ marginBottom: '2em' }}>
+    <Section sx={{ textAlign: 'center' }}>
 
       {!service && (
-        <>
+        <Section style={{ display: 'flex', flexDirection: 'column' }}>
           <Typography color="inherit" variant="h5" component="div" sx={{ mb: 4 }}>
             Електронна черга
           </Typography>
@@ -261,7 +262,7 @@ const QueueForm = () => {
             current={service?.name}
             fullWidth
           />
-        </>
+        </Section>
       )}
 
 
@@ -401,7 +402,7 @@ const QueueForm = () => {
         </>
       )}
       <QueueInformer />
-    </div >
+    </Section>
   )
 }
 
