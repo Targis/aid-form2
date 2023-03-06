@@ -3,7 +3,7 @@ const getActionURI = (keyString) =>
 
 // Aid registration key
 const key =
-  'AKfycbz2onZwIjr_l5F5nu1SiL8vuAVf7-KrKKTHUvj-0pBHzP5AUkOMmNbs20jdidJ1bPb9'
+  'AKfycbwj6YBEmohgohLFLGMnp5gTiTjHhK1pC_P5Yowjy-2zTyCtmK9rzWI58EZBaK9pKD8g'
 
 // HUB's queue key
 const hubKey =

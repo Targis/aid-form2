@@ -1,5 +1,6 @@
 import Header from 'components/Header'
 import RegisterForm from 'components/RegisterForm'
+import RegisterClosed from 'components/RegisterClosed'
 import ReminderForm from 'components/ReminderForm'
 import QueueForm from 'components/QueueForm'
 import ClothesForm from 'components/forms/ClothesForm/ClothesForm'
@@ -36,7 +37,8 @@ function App() {
               <Route path="/" element={<Navigate to="/orikhiv-aid" />} />
               <Route path="/orikhiv-aid" element={<Home />} />
 
-              <Route path="/orikhiv-aid/register" element={<RegisterForm />} />
+              <Route path="/orikhiv-aid/register" element={<RegisterClosed />} />
+              <Route path="/orikhiv-aid/new" element={<RegisterForm />} />
               <Route path="/orikhiv-aid/reminder" element={<ReminderForm />} />
               <Route path="/orikhiv-aid/queue" element={<QueueForm />} />
               <Route path="/orikhiv-aid/clothes" element={<ClothesForm />} />
