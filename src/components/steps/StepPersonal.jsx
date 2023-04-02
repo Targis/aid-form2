@@ -11,6 +11,9 @@ import { add } from 'date-fns'
 const today = new Date()
 const minDate = add(today, { years: -18 })
 
+const passportRegex =
+  /^(?:[А-ЩЬЮЯЄІЇҐ]{2}\d{6}|\d{10}|відмітка)$/
+
 const personalSchema = yup.object({
   lastName: yup
     .string()
@@ -33,6 +36,12 @@ const personalSchema = yup.object({
     .transform(parseDateString)
     .typeError('Будь ласка, введіть дату в такому форматі ДД.ММ.РРРР')
     .max(minDate, 'Мінімальний вік 18 років'),
+  passport: yup
+    .string()
+    .matches(
+      passportRegex,
+      'Невірний формат, наприклад: СА123456 або 001234567. '
+    ).required("Це поле обов'язкове. Якщо в паспорті наявна відмітка про право здійснювати будь-які платежі без ідентифікаційного номера, то напишіть у цьому полі слово \"відмітка\""),
   familySize: yup
     .number()
     .required("Це поле обов'язкове")
@@ -60,6 +69,8 @@ const StepPersonal = () => {
         formatResult={true}
         fullWidth
       />
+
+      <TextInput name="passport" label="Серія, номер паспорта" fullWidth />
 
       <SelectInput
         name="socialStatus"

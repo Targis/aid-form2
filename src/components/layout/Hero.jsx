@@ -1,10 +1,9 @@
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
-import Section from 'components/layout/Section';
 import { styled } from '@mui/material/styles';
-import { NavLink } from "react-router-dom";
 import heroImage from 'img/hero-image.svg'
+
 
 const GridContainer = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
@@ -33,7 +32,8 @@ const HeroTitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const Hero = () => {
+
+const Hero = ({ scrollTo }) => {
   return (
     <GridContainer maxWidth={'lg'} container sx={{
       pt: 5,
@@ -51,12 +51,9 @@ const Hero = () => {
         <Button
           variant="contained"
           size="large"
-          component={NavLink}
-          to="register"
+          onClick={scrollTo.categories}
           sx={{
-            mb: 8,
-            // width: '100%',
-            // maxWidth: '210px'
+            mb: 8
           }}>
           Обрати категорію
         </Button>

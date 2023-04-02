@@ -1,10 +1,11 @@
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import { NavLink } from "react-router-dom"
+import Section from "./layout/Section"
 
 const RegisterClosed = () => {
   return (
-    <>
+    <Section maxWidth={"sm"}>
       <Typography>
         З 06.03.2023 онлайн реєстрацію ВПО в гуманітарній базі призупинено <br /><br />
 
@@ -27,7 +28,7 @@ const RegisterClosed = () => {
         </Button>
 
       </Typography>
-    </>
+    </Section>
 
   )
 }

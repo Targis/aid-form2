@@ -105,7 +105,7 @@ function FormikStepper({ children, ...props }) {
             // console.log(data)
 
             if (data.result === 'success') {
-              Swal.fire('Успіх!', `Ви успішно зареєструвались у черзі. Ваш номер: <br>
+              Swal.fire('Успіх!', `Ви успішно зареєструвались в гуманітарній базі. Ваш номер: <br>
               <strong style="font-size: 1.5em;">${data.number}</strong><br>
               Цей номер потрібно зберегти (записати).`, 'success')
               setCompleted(false)

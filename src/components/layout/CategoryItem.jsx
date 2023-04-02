@@ -7,9 +7,9 @@ import { NavLink } from "react-router-dom"
 
 
 
-const CategoryItem = ({ name, text, link }) => {
+const CategoryItem = ({ name, text, link, active }) => {
   return (
-    <Card elevation={1}>
+    <Card elevation={1} sx={{ height: '222px', pb: 2, display: 'flex', flexDirection: 'column', justifyContent: "space-between", opacity: active ? 1 : 0.5 }}>
       <CardContent>
         <Typography variant="h6" component="h3" sx={{ mb: 1.5 }}>
           {name}
@@ -19,14 +19,19 @@ const CategoryItem = ({ name, text, link }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
-          variant="outlined"
-          component={NavLink}
-          to={link}
-          size="small"
-        >
-          Перейти
-        </Button>
+        {active ? (
+          <Button
+            variant="outlined"
+            component={NavLink}
+            to={link}
+            size="small"
+          >
+            Перейти
+          </Button>
+        ) : (
+          <Button disabled>Неактивно</Button>
+        )}
+
       </CardActions>
     </Card>
   )

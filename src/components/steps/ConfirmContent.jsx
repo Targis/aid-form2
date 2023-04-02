@@ -6,7 +6,7 @@ import { useFormikContext } from 'formik'
 const ConfirmContent = () => {
   const { values } = useFormikContext();
 
-  const { lastName, firstName, middleName, birthday, inn, socialStatus, familySize, children, city, street, addrNum, addrCorp, addrRoom, factAddress, vpoNumber, vpoDate, phoneNumber } = values
+  const { lastName, firstName, middleName, birthday, inn, socialStatus, familySize, children, city, street, addrNum, addrCorp, addrRoom, factAddress, vpoNumber, vpoDate, phoneNumber, passport } = values
   const getStreet = () => {
     if (city === 'м.Оріхів') {
       const normalizedStreet = street.split(', ').reverse().join(' ')
@@ -38,6 +38,10 @@ const ConfirmContent = () => {
     {
       primary: `Податковий номер`,
       secondary: inn
+    },
+    {
+      primary: `Паспорт`,
+      secondary: passport
     },
     {
       primary: `Соціальний статус`,

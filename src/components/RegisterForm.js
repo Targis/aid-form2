@@ -22,6 +22,7 @@ const initialValues = {
   middleName: '',
   birthday: '',
   inn: '',
+  passport: '',
   socialStatus: 'відсутній',
   familySize: '',
   children: '',
@@ -95,56 +96,16 @@ const RegisterForm = () => {
         }
       })
     }
-    // await Swal.fire({
-    //   titleText: 'Авторизація',
-    //   text: 'Введіть пароль, щоб продовжити',
-    //   input: 'checkbox',
-    //   inputValue: 0,
-    //   inputPlaceholder: 'Більше не показувати це',
-    //   confirmButtonText: 'Продовжити',
-    //   allowOutsideClick: false,
-    // }).then(({ value: accept, isConfirmed }) => {
-    //   if (accept) localStorage.setItem('is_allowed', true)
-    // })
-  })
+  },[])
 
-  // const informUser = useCallback(async () => {
-  //   const skip = localStorage.getItem('skip')
-  //   if (skip) {
-  //     return
-  //   }
-  //   await Swal.fire({
-  //     titleText: 'Зверніть увагу',
-  //     text: 'З одного номеру телефону та податковим номером можна подати лише одну заявку.',
-  //     input: 'checkbox',
-  //     inputValue: 0,
-  //     inputPlaceholder: 'Більше не показувати це',
-  //     confirmButtonText: 'Продовжити',
-  //     allowOutsideClick: false,
-  //   }).then(({ value: accept, isConfirmed }) => {
-  //     if (accept) localStorage.setItem('skip', true)
-  //   })
-  // })
-
-  // const handleReCaptchaVerify = useCallback(async () => {
-  //   if (!executeRecaptcha) {
-  //     console.log('Execute recaptcha not yet available');
-  //     return;
-  //   }
-  //   // const token = await executeRecaptcha('someAction');
-  // }, [executeRecaptcha]);
-
-  // useEffect(() => {
-  //   handleReCaptchaVerify();
-  // }, [handleReCaptchaVerify]);
-
+  
   useEffect(() => {
     checkUser()
   }, [checkUser])
 
   return (
-    <div style={{ marginBottom: '2em' }}>
-      <Typography color="inherit" variant="h6" component="div" sx={{ mb: 4 }}>
+    <Section style={{ marginBottom: '2em' }} maxWidth={"sm"}>
+      <Typography color="inherit" variant="h6" component="div" sx={{ textAlign: 'center', mb: 4 }}>
         Форма реєстрації
       </Typography>
 
@@ -168,13 +129,13 @@ const RegisterForm = () => {
           <StepConfirm label="Підтвердіть" validationSchema={confirmSchema} />
         </FormikStepper>
       ) : (
-        <div>
+        <Section sx={{textAlign: 'center'}} maxWidth='sm'>
           <Typography>Ви не авторизовані</Typography>
 
           <Button onClick={checkUser}>Вхід</Button>
-        </div>
+        </Section>
       )}
-    </div>
+    </Section>
   )
 }
 
