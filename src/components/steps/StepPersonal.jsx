@@ -12,7 +12,7 @@ const today = new Date()
 const minDate = add(today, { years: -18 })
 
 const passportRegex =
-  /^(?:[А-ЩЬЮЯЄІЇҐ]{2}\d{6}|\d{10}|відмітка)$/
+  /^(?:[А-ЩЬЮЯЄІЇҐ]{2}\d{6}|\d{9}|відмітка)$/
 
 const personalSchema = yup.object({
   lastName: yup
