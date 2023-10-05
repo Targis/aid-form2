@@ -11,6 +11,7 @@ const CheckField = ({ name, label, helperText, ...props }) => {
       <FormControlLabel
         control={
           <Checkbox
+            {...props}
             {...field}
             name={name}
             id={'input-' + name}

@@ -37,7 +37,6 @@ function FormikStepper({ children, ...props }) {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data)
             switch (data?.result) {
               case 'notFoundAll':
                 setStep((s) => s + 1)
@@ -60,7 +59,7 @@ function FormikStepper({ children, ...props }) {
                 setStep(0)
                 break
               case 'invalidInn':
-                Swal.fire('Увага!', 'Такий номер телефону вже є в базі, але в нас відсутні деякі ваші дані. Звеніться у хаб з оригіналами паспорта, коду та довідки ВПО, щоб надалі мати змогу отримувати гуманітарну допомогу!', 'warning')
+                Swal.fire('Увага!', 'Такий номер телефону вже є в базі, але в нас відсутні деякі ваші дані. Зверніться у хаб з оригіналами паспорта, коду та довідки ВПО, щоб надалі мати змогу отримувати гуманітарну допомогу!', 'warning')
                 helpers?.resetForm()
                 setStep(0)
                 break

@@ -17,6 +17,7 @@ const MaskedTextField = ({
     <PatternFormat
       // {...field}
       {...props}
+      id={`input-${name}`}
       name={name}
       label={label}
       format={format}

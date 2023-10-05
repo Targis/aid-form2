@@ -79,7 +79,7 @@ const RegisterForm = () => {
         allowEscapeKey: false,
         allowEnterKey: false,
       }).then((res) => {
-        console.log({ res })
+        // console.log({ res })
         if (res.value?.result === 'success') {
           setAllowed(true)
           setCookie('ref', 'hub', { 'max-age': 4 * 3600 })
@@ -96,16 +96,20 @@ const RegisterForm = () => {
         }
       })
     }
-  },[])
+  }, [])
 
-  
   useEffect(() => {
     checkUser()
   }, [checkUser])
 
   return (
-    <Section style={{ marginBottom: '2em' }} maxWidth={"sm"}>
-      <Typography color="inherit" variant="h6" component="div" sx={{ textAlign: 'center', mb: 4 }}>
+    <Section style={{ marginBottom: '2em' }} maxWidth={'sm'}>
+      <Typography
+        color="inherit"
+        variant="h6"
+        component="div"
+        sx={{ textAlign: 'center', mb: 4 }}
+      >
         Форма реєстрації
       </Typography>
 
@@ -115,7 +119,7 @@ const RegisterForm = () => {
           // validateOnChange={false}
           // validateOnBlur={false}
           onSubmit={async (values) => {
-            console.log(values)
+            // console.log(values)
           }}
         >
           <StepCheck
@@ -129,7 +133,7 @@ const RegisterForm = () => {
           <StepConfirm label="Підтвердіть" validationSchema={confirmSchema} />
         </FormikStepper>
       ) : (
-        <Section sx={{textAlign: 'center'}} maxWidth='sm'>
+        <Section sx={{ textAlign: 'center' }} maxWidth="sm">
           <Typography>Ви не авторизовані</Typography>
 
           <Button onClick={checkUser}>Вхід</Button>

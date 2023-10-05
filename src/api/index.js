@@ -2,8 +2,12 @@ const getActionURI = (keyString) =>
   `https://script.google.com/macros/s/${keyString}/exec`
 
 // Aid registration key
+// const key =
+//   'AKfycbwj6YBEmohgohLFLGMnp5gTiTjHhK1pC_P5Yowjy-2zTyCtmK9rzWI58EZBaK9pKD8g'
+
+// Aid registration test key
 const key =
-  'AKfycbwj6YBEmohgohLFLGMnp5gTiTjHhK1pC_P5Yowjy-2zTyCtmK9rzWI58EZBaK9pKD8g'
+  'AKfycbxALoyn1nHPHGwsM8cspKxqOJKrl6dXQHFa12BZkKiBsRHDIbFy4_kfl9CZd7rwu3U'
 
 // HUB's queue key
 const hubKey =

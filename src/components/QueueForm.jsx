@@ -7,7 +7,7 @@ import MaskedTextField from 'components/inputs/MaskedTextField'
 import CheckField from 'components/inputs/CheckField'
 import SimpleSelect from 'components/inputs/SimpleSelect'
 import SelectInput from 'components/inputs/SelectInput'
-import QueueInformer from './QueueInformer'
+// import QueueInformer from './QueueInformer'
 import Section from './layout/Section'
 import { CircularProgress, Button } from '@mui/material'
 import LinearProgressWithLabel from './LinearProgressWithLabel'
@@ -405,8 +405,6 @@ const QueueForm = () => {
                   </>
                 )}
 
-
-
               </Form>
             )}
 
@@ -414,7 +412,7 @@ const QueueForm = () => {
 
         </>
       )}
-      <QueueInformer />
+      {/* <QueueInformer /> */}
     </Section>
   )
 }

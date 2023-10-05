@@ -2,7 +2,7 @@ import { TextField } from '@mui/material'
 import { useField } from 'formik'
 
 export const TextInput = ({ ...props }) => {
-  const [field, meta] = useField(props.name)
+  const [field, meta, helpers] = useField(props.name)
   const sx = props?.sx || null
 
   return (
