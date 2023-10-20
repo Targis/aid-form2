@@ -8,7 +8,7 @@ const ConfirmContent = () => {
 
   const { lastName, firstName, middleName, birthday, inn, socialStatus, familySize, children, city, street, addrNum, addrCorp, addrRoom, factAddress, vpoNumber, vpoDate, phoneNumber, passport } = values
   const getStreet = () => {
-    if (city === 'м.Оріхів') {
+    if (city === 'Оріхів') {
       const normalizedStreet = street.split(', ').reverse().join(' ')
       return normalizedStreet
     }

@@ -25,16 +25,15 @@ const Confirm = ({
   },
 }) => {
   const getStreet = () => {
-    if (city === 'м.Оріхів') {
+    if (city === 'Оріхів') {
       const streetArr = street.split(', ')
       return `${streetArr[1]} ${streetArr[0]}`
     }
     return street
   }
 
-  const fullAddress = `${city}, ${getStreet()}, ${addrNum}${
-    addrCorp ? '-' + addrCorp : ''
-  } ${addrRoom ? 'кв. ' + addrRoom : ''}`
+  const fullAddress = `${city}, ${getStreet()}, ${addrNum}${addrCorp ? '-' + addrCorp : ''
+    } ${addrRoom ? 'кв. ' + addrRoom : ''}`
   return (
     <>
       <List
