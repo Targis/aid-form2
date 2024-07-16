@@ -4,7 +4,7 @@ import { PatternFormat } from 'react-number-format'
 
 const PersonDetails = ({ values }) => {
 
-  const { last_name, first_name, middle_name, born, tax_number, document, tel, address_city, address_street, address_numbrer, address_corpus, address_room, vpo_address, vpo_number, vpo_date, has_qr, has_disability, disability_group, has_disease, is_soldier_family, is_poor, is_single, is_householder, is_pensioner, notes, need_call } = values
+  const { last_name, first_name, middle_name, born, tax_number, document, tel, address_city, address_street, address_numbrer, address_corpus, address_room, vpo_address, vpo_number, vpo_date, has_qr, disability_group, has_disease, is_soldier_family, is_poor, is_single, is_householder, is_pensioner, notes, need_call, is_war_disability, fallen_hero_family, is_veteran } = values
   const getStreet = () => {
     if (address_city === 'м.Оріхів') {
       const normalizedStreet = address_street.split(', ').reverse().join(' ')
@@ -17,7 +17,7 @@ const PersonDetails = ({ values }) => {
   const fullAddress = `${address_city}, ${getStreet()}, ${address_numbrer}${address_corpus ? '-' + address_corpus : ''}${address_room ? ', кв. ' + address_room : ''}`
   const vpoDoc = `від ${vpo_date} № ${vpo_number}`
 
-  const disability = has_disability ? `✅ Так (${disability_group})` : '❌ Ні'
+  // const disability = has_disability ? `✅ Так (${disability_group})` : '❌ Ні'
 
   const summary = [
     {
@@ -55,24 +55,36 @@ const PersonDetails = ({ values }) => {
       secondary: vpoDoc
     },
     {
-      primary: 'Наявність QR-коду',
-      secondary: has_qr ? '✅ Так' : '❌ Ні'
+      primary: 'Група інвалідності',
+      secondary: disability_group || 'відсутня'
     },
     {
-      primary: 'Пенсіонер за віком',
-      secondary: is_pensioner ? '✅ Так' : '❌ Ні'
-    },
-    {
-      primary: 'Інвалідність',
-      secondary: disability
+      primary: 'Інвалідність внаслідок війни',
+      secondary: is_war_disability ? '✅ Так' : '❌ Ні'
     },
     {
       primary: 'Хронічні захворювання',
       secondary: has_disease ? '✅ Так' : '❌ Ні'
     },
     {
-      primary: 'Родина військовослужбовця',
+      primary: 'Учасник бойових дій',
+      secondary: is_veteran ? '✅ Так' : '❌ Ні'
+    },
+    {
+      primary: 'Член родини військовослужбовця',
       secondary: is_soldier_family ? '✅ Так' : '❌ Ні'
+    },
+    {
+      primary: 'Член родини загиблого військовослужбовця',
+      secondary: fallen_hero_family ? '✅ Так' : '❌ Ні'
+    },
+    {
+      primary: 'Наявність QR-коду',
+      secondary: has_qr ? '✅ Так' : '❌ Ні'
+    },
+    {
+      primary: 'Пенсіонер, якому ще не виповнилось 60 років',
+      secondary: is_pensioner ? '✅ Так' : '❌ Ні'
     },
     {
       primary: 'Малозабезпечена родина',

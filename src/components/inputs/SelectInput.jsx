@@ -5,7 +5,7 @@ import Select from '@mui/material/Select'
 import FormHelperText from '@mui/material/FormHelperText'
 import { useField } from 'formik'
 
-export default function SelectInput({ ...props }) {
+export default function SelectInput({ withNone = false, ...props }) {
   const { name, label, options } = props
   const [field, meta] = useField(name)
 
@@ -25,6 +25,12 @@ export default function SelectInput({ ...props }) {
         label={label}
         value={meta.value}
       >
+        {withNone && (
+          <MenuItem value="">
+            <em>Немає</em>
+          </MenuItem>
+        )}
+
         {options.map((option, i) => (
           <MenuItem key={i} value={option?.id ? option?.id : option}>
             {option?.label ? option?.label : option}

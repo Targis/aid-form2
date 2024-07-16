@@ -21,6 +21,7 @@ import StreetField from 'components/inputs/StreetField'
 import { streets, cities } from 'helpers/toponyms'
 import isBefore from 'date-fns/isBefore'
 import { action } from 'api'
+import Divider from '@mui/material/Divider'
 
 // async function stall(stallTime = 3000) {
 //   await new Promise(resolve => setTimeout(resolve, stallTime));
@@ -45,13 +46,15 @@ const initialValues = {
   vpo_date: '',
 
   has_qr: false,
-  is_pensioner: false,
-  has_disability: false,
   disability_group: '',
+  is_war_disability: false,
   has_disease: false,
+  is_veteran: false,
   is_soldier_family: false,
+  fallen_hero_family: false,
   is_poor: false,
   is_single: false,
+  is_pensioner: false,
   is_householder: false,
   need_call: false,
   notes: ''
@@ -207,6 +210,12 @@ const validationSchema = yup.object().shape({
     .max(today, 'Невірна дата'),
   // is_householder: yup
   //   .boolean(),
+  disability_group: yup
+    .string()
+    .when('is_war_disability', (is_war_disability, passSchema) => is_war_disability ? passSchema
+      .required("Це поле обов'язкове, коли стоїть відмітка \"Інвалідність внаслідок війни\"")
+      : passSchema
+    ),
 })
 
 const testVals = {
@@ -436,35 +445,47 @@ const RegisterForm = ({ submitAction, isHouseholder, personValues = null, closeA
 
             <FamilyFormSubtitle>Додаткова інформація</FamilyFormSubtitle>
 
-            <Grid item xs={12}>
-              <CheckField name="has_qr" label="Наявність QR" disabled={isValidating}></CheckField>
-            </Grid>
-
-            <Grid item xs={12}>
-              <CheckField name="is_pensioner" label="Пенсіонер за віком молодше 60 років" disabled={isValidating}></CheckField>
-            </Grid>
-
             <Grid item xs={6}>
-              <CheckField name="has_disability" label="Інвалідність" disabled={isValidating}></CheckField>
-            </Grid>
-
-            <Grid item xs={6}>
-              {values.has_disability && (<SelectInput
+              <SelectInput
                 name="disability_group"
                 label="Група інвалідності"
                 options={disabilityOptions}
                 defaultValue=""
                 disabled={isValidating}
+                withNone={true}
               />
-              )}
+            </Grid>
+
+            <Grid item xs={6}>
+              <CheckField name="is_war_disability" label="Інвалідність внаслідок війни" disabled={isValidating || !values.disability_group}></CheckField>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <CheckField name="has_disease" label="Хронічні захворювання" disabled={isValidating}></CheckField>
             </Grid>
 
+            <Divider sx={{ mb: 3 }} />
+
             <Grid item xs={12} sm={6}>
-              <CheckField name="is_soldier_family" label="Родина військовослужбовця" disabled={isValidating}></CheckField>
+              <CheckField name="is_veteran" label="Учасник бойових дій" disabled={isValidating}></CheckField>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <CheckField name="is_soldier_family" label="Член родини військовослужбовця" disabled={isValidating}></CheckField>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <CheckField name="fallen_hero_family" label="Член родини загиблого військовослужбовця" disabled={isValidating}></CheckField>
+            </Grid>
+
+            <Divider sx={{ mb: 3 }} />
+
+            <Grid item xs={12}>
+              <CheckField name="has_qr" label="Наявність QR-коду" disabled={isValidating}></CheckField>
+            </Grid>
+
+            <Grid item xs={12}>
+              <CheckField name="is_pensioner" label="Пенсіонер, якому ще не виповнилось 60 років" disabled={isValidating}></CheckField>
             </Grid>
 
             <Grid item xs={12} sm={6}>

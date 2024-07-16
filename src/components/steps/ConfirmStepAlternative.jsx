@@ -32,9 +32,8 @@ const Confirm = ({
     return street
   }
 
-  const fullAddress = `${city}, ${getStreet()}, ${addrNum}${
-    addrCorp ? '-' + addrCorp : ''
-  } ${addrRoom ? 'кв. ' + addrRoom : ''}`
+  const fullAddress = `${city}, ${getStreet()}, ${addrNum}${addrCorp ? '-' + addrCorp : ''
+    } ${addrRoom ? 'кв. ' + addrRoom : ''}`
   return (
     <>
       <List
