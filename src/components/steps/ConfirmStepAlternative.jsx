@@ -25,7 +25,7 @@ const Confirm = ({
   },
 }) => {
   const getStreet = () => {
-    if (city === 'м.Оріхів') {
+    if (city === 'Оріхів') {
       const streetArr = street.split(', ')
       return `${streetArr[1]} ${streetArr[0]}`
     }

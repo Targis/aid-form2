@@ -9,7 +9,7 @@ const StreetField = ({ streets, name, label, ...props }) => {
   const [field, meta, helpers] = useField(name)
   const { value } = meta
 
-  const hasOptions = address_city === 'м.Оріхів'
+  const hasOptions = address_city === 'Оріхів'
   const isOption = streets.findIndex(item => item.label === value) > -1
 
   let newVal = ''

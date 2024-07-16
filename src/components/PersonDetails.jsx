@@ -6,7 +6,7 @@ const PersonDetails = ({ values }) => {
 
   const { last_name, first_name, middle_name, born, tax_number, document, tel, address_city, address_street, address_numbrer, address_corpus, address_room, vpo_address, vpo_number, vpo_date, has_qr, disability_group, has_disease, is_soldier_family, is_poor, is_single, is_householder, is_pensioner, notes, need_call, is_war_disability, fallen_hero_family, is_veteran } = values
   const getStreet = () => {
-    if (address_city === 'м.Оріхів') {
+    if (address_city === 'Оріхів') {
       const normalizedStreet = address_street.split(', ').reverse().join(' ')
       return normalizedStreet
     }
