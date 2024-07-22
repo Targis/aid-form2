@@ -3,7 +3,7 @@ const getActionURI = (keyString) =>
 
 // Aid registration key
 const key =
-  'AKfycbxALoyn1nHPHGwsM8cspKxqOJKrl6dXQHFa12BZkKiBsRHDIbFy4_kfl9CZd7rwu3U'
+  'AKfycbyOrdI3vt7wOHg6V-ZmhQGgXfBJrBqLAcM9j4Yh0YGLSJVCo6wiLo0b3jplTUtXGZZ9'
 
 // TEST KEY
 // const key =
