@@ -2,8 +2,7 @@ const getActionURI = (keyString) =>
   `https://script.google.com/macros/s/${keyString}/exec`
 
 // Aid registration key
-const key =
-  'AKfycbyOrdI3vt7wOHg6V-ZmhQGgXfBJrBqLAcM9j4Yh0YGLSJVCo6wiLo0b3jplTUtXGZZ9'
+const key = 'AKfycbyOrdI3vt7wOHg6V-ZmhQGgXfBJrBqLAcM9j4Yh0YGLSJVCo6wiLo0b3jplTUtXGZZ9'
 
 // TEST KEY
 // const key =
