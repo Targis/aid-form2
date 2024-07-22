@@ -1,12 +1,12 @@
 # Orikhiv Aid
 
-This web application helps residents of the Orikhiv hromada, forced to leave their hometown due to Russian aggression, receive humanitarian aid. 
+This web application helps residents of the Orikhiv hromada, forced to leave their hometown, receive humanitarian aid. 
 
 This app provides a service for registration in the hromada's database and receiving an individual number that can be used for getting humanitarian aid.
 
 Also, through this application, a person can register and receive a date and time to visit our office.
 
-The data collects in a Google table. Uses Google Apps Script as a backend part.
+The data is collected in a Google table. Uses Google Apps Script as a backend part.
 
 ## Available Scripts
 
