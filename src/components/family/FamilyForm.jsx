@@ -37,13 +37,14 @@ const initialValues = {
   document: '',
   tel: '',
   address_city: '',
-  address_street: '',
+  address_street: null,
   address_numbrer: '',
   address_corpus: '',
   address_room: '',
   vpo_address: '',
   vpo_number: '',
   vpo_date: '',
+  in_hostel: false,
 
   has_qr: false,
   disability_group: '',
@@ -405,7 +406,7 @@ const RegisterForm = ({ submitAction, isHouseholder, personValues = null, closeA
             <FamilyFormSubtitle>Дані ВПО</FamilyFormSubtitle>
 
             <Grid container columnSpacing={2} columns={12}>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={9} md={10}>
                 <TextInput
                   name="vpo_address"
                   label="Фактичне місце проживання згідно довідки ВПО"
@@ -413,6 +414,10 @@ const RegisterForm = ({ submitAction, isHouseholder, personValues = null, closeA
                   fullWidth
                   disabled={isValidating}
                 />
+              </Grid>
+
+              <Grid item xs={12} sm={3} md={2}>
+                <CheckField name="in_hostel" label="МТП" disabled={isValidating}></CheckField>
               </Grid>
 
               <Grid item xs={12} sm={7}>
